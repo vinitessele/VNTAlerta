@@ -1,8 +1,8 @@
 using Microsoft.Toolkit.Uwp.Notifications;
-using System;
 using System.Data.SQLite;
-using System.IO;
-using System.Xml.Linq;
+using System.Net;
+using System.Net.Mail;
+using Windows.Media.Protection.PlayReady;
 
 namespace VNT_Alerta
 {
@@ -27,8 +27,9 @@ namespace VNT_Alerta
             InitializeComponent();
             CriaBancoDados();
             CriarTabelaSQlite();
+            EnviaEmail();
+            Application_Startup();
         }
-
         private void CriaBancoDados()
         {
             try
@@ -40,12 +41,11 @@ namespace VNT_Alerta
 
                     dataBasePath = startupPath + dbName;
 
-
                     SQLiteConnection.CreateFile(dataBasePath);
                 }
                 catch
                 {
-                    MessageBox.Show("Failed to create database", "DB Creator");
+                    MessageBox.Show("Falha ao criar o banco de dados", "DB Creator");
                 }
             }
             catch
@@ -82,9 +82,6 @@ namespace VNT_Alerta
                 throw ex;
             }
         }
-
-
-
         private void Application_Startup()
         {
             new ToastContentBuilder()
@@ -95,6 +92,43 @@ namespace VNT_Alerta
          {
              toast.ExpirationTime = DateTime.Now.AddDays(1);
          });
+        }
+        private void EnviaEmail()
+        {
+            // Configurações do servidor SMTP
+            string smtpServer = "smtp.gmail.com";
+            int smtpPort = 587;
+            string smtpUsername = "vntnotificacao@gmail.com";
+            string smtpPassword = "sifw qwdn xbmc gebh";
+
+            // Endereço de email do remetente
+            string fromEmail = "vntnotificacao@gmail.com";
+
+            // Endereço de email do destinatário
+            string toEmail = "vinicius_tessele@hotmail.com";
+
+            // Criar objeto de mensagem
+            MailMessage message = new MailMessage(fromEmail, toEmail);
+            message.Subject = "Assunto do email";
+            message.Body = "Conteúdo do email";
+
+            // Configurar cliente SMTP
+            SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
+            smtp.UseDefaultCredentials = false;
+            smtp.EnableSsl = true; // Use SSL para conexão segura
+            smtp.Credentials = new System.Net.NetworkCredential(smtpUsername, smtpPassword);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.EnableSsl = true;
+            try
+            {
+                // Enviar email
+                smtp.Send(message);
+                Console.WriteLine("Email enviado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao enviar o email: " + ex.Message);
+            }
         }
 
     }
