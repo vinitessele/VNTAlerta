@@ -8,7 +8,7 @@ namespace VNT_Alerta
 {
     public class DaoNotificacao
     {
-        public int IdNotificacao { get; set; }
+        public int Id { get; set; }
         public string? DescricaoNotificacao { get; set; }
         public DateTime? DateNotificacao { get; set; }
     }

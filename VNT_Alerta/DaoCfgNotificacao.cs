@@ -8,7 +8,7 @@ namespace VNT_Alerta
 { 
     public class DaoCfgNotificacao
     {
-        public int IdCfgNotigicacao {get;set;}
+        public int Id {get;set;}
         public string emailFrom { get; set; }
         public string emailTo { get; set; }
         public string emailSubject { get; set; }

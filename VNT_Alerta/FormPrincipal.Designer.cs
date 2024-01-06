@@ -41,8 +41,6 @@
         }
 
         #endregion
-        private ToolStripMenuItem cadastrosToolStripMenuItem;
-        private ToolStripMenuItem configuraçãoToolStripMenuItem;
-        private ToolStripMenuItem notificaçãoToolStripMenuItem;
+
     }
 }
