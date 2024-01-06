@@ -22,5 +22,6 @@ namespace VNT_Alerta
         public string statusAtivacao { get; set; }
         public DateTime dataInicioAtivacao { get; set; }
         public DateTime dataFimAtivacao { get; set; }
+        public string identificacaoCliente { get; set; }
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VNT_Alerta")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+52cc58e492aaeb5d9005f54cdcf47def6755954d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+051c39967c3110eb7f6ce0ec9edd1b2f045a5035")]
 [assembly: System.Reflection.AssemblyProductAttribute("VNT_Alerta")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VNT_Alerta")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
