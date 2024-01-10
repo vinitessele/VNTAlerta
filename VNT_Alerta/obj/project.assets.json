@@ -2546,9 +2546,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vinicius\\source\\repos\\VNT_Alerta\\VNT_Alerta\\VNT_Alerta.csproj",
-      "projectName": "VNT_Alerta",
-      "projectPath": "C:\\Users\\Vinicius\\source\\repos\\VNT_Alerta\\VNT_Alerta\\VNT_Alerta.csproj",
+      "projectUniqueName": "C:\\Users\\Vinicius\\source\\repos\\VNT_Alerta\\VNT_Alerta\\VNT_CentralDeNotificacao.csproj",
+      "projectName": "VNT_CentralDeNotificacao",
+      "projectPath": "C:\\Users\\Vinicius\\source\\repos\\VNT_Alerta\\VNT_Alerta\\VNT_CentralDeNotificacao.csproj",
       "packagesPath": "C:\\Users\\Vinicius\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Vinicius\\source\\repos\\VNT_Alerta\\VNT_Alerta\\obj\\",
       "projectStyle": "PackageReference",

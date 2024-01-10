@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VNT_Alerta
+namespace VNT_CentralDeNotificacao
 {
     public class Crypt
     {

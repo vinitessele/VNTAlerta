@@ -1,4 +1,4 @@
-namespace VNT_Alerta
+namespace VNT_CentralDeNotificacao
 {
     internal static class Program
     {

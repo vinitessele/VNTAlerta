@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Contacts;
 using Microsoft.EntityFrameworkCore;
 
-namespace VNT_Alerta
+namespace VNT_CentralDeNotificacao
 {
     public partial class Context : DbContext
     {

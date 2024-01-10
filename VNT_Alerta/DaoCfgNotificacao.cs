@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VNT_Alerta
+namespace VNT_CentralDeNotificacao
 { 
     public class DaoCfgNotificacao
     {

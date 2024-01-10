@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BgXDj9uPQ6GQ3iS0xAcCm9gsxD5GwsXC/ATw0+bMEexVD9kgeJee2du02Otx6qwLRvM8OPo0hMnofOcpA4enXQ==",
+  "dgSpecHash": "Um9bGjaUz34UMax5MWbimWeYY6BeyUkBEkicML9qPfN4u0bCM8uMUQCPMPj1m5wEP20r2Jv+knO57TM8Z4iNMA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vinicius\\source\\repos\\VNT_Alerta\\VNT_Alerta\\VNT_Alerta.csproj",
+  "projectFilePath": "C:\\Users\\Vinicius\\source\\repos\\VNT_Alerta\\VNT_Alerta\\VNT_CentralDeNotificacao.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vinicius\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\Vinicius\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
