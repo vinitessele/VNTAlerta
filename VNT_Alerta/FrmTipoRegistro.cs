@@ -47,10 +47,8 @@ namespace VNT_CentralDeNotificacao
                     m.AlterTipoRegistro(d);
                 }
                 MessageBox.Show("Registro salvo com sucesso");
-                this.Close();
             }
             catch { throw; }
-
         }
 
         private void btnPesquisar_Click(object sender, EventArgs e)
@@ -63,8 +61,33 @@ namespace VNT_CentralDeNotificacao
         private void textID_TextChanged(object sender, EventArgs e)
         {
             Model get = new();
-            string descricao = get.GetTipoRegistroID(textID.Text);
+            string descricao = string.Empty;
+
+            if (textID.Text != string.Empty)
+                descricao = get.GetTipoRegistroID(textID.Text);
+            
             textDescricao.Text = descricao;
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = 0;
+                if (textID.Text != string.Empty)
+                {
+                    id = int.Parse(textID.Text);
+                }
+                if (id != 0)
+                {
+                    Model m = new();
+
+                    m.DeleteTipoRegistro(id);
+
+                    MessageBox.Show("Registro Excluido com sucesso");
+                }
+            }
+            catch { throw; }
         }
     }
 }

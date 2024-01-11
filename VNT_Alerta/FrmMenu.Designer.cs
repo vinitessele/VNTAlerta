@@ -122,7 +122,7 @@
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "FrmMenu";
-            Text = "FormMenu";
+            Text = "*** Central de notificação VNT - Sistemas ***";
             WindowState = FormWindowState.Maximized;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();

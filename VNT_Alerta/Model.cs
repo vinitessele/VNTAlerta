@@ -36,6 +36,21 @@ namespace VNT_CentralDeNotificacao
                 throw;
             }
         }
+        public void DeleteTipoRegistro(int id)
+        {
+            try
+            {
+                Context db = new();
+                DaoTipoRegistro t = db.tipoRegistro.FirstOrDefault(p => p.Id == id);
+                db.tipoRegistro.Remove(t);
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
         public List<DaoTipoRegistro> GetTipoRegistro(string texto)
         {
             Context db = new Context();
@@ -46,7 +61,7 @@ namespace VNT_CentralDeNotificacao
                         Id = t.Id,
                         Descricao = t.Descricao
                     };
-            return q.ToList(); 
+            return q.ToList();
         }
         public string GetTipoRegistroID(string texto)
         {
@@ -54,6 +69,37 @@ namespace VNT_CentralDeNotificacao
             string descricao = db.tipoRegistro.FirstOrDefault(p => p.Id == int.Parse(texto)).Descricao;
             return descricao;
         }
-
+        public void SetCfgNotificacao(DaoCfgNotificacao dados)
+        {
+            try
+            {
+                Context db = new();
+                db.cfgNotificacao.Add(dados);
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public void AlterCfgNotificacao(DaoCfgNotificacao dados)
+        {
+            try
+            {
+                Context db = new();
+                DaoCfgNotificacao n = db.cfgNotificacao.FirstOrDefault(p => p.Id == dados.Id);
+                n.emailTo = dados.emailTo;
+                n.emailSubject = dados.emailSubject;
+                n.emailBody = dados.emailBody;
+                n.DiasNotificacao = dados.DiasNotificacao;
+                n.notificacaoWindows = dados.notificacaoWindows;
+                n.notificacaoEmail = dados.notificacaoEmail;
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

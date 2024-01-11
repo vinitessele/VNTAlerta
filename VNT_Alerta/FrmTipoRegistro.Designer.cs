@@ -50,6 +50,10 @@
             // 
             btnNovo.Click += BtnNovo_Click;
             // 
+            // btnExcluir
+            // 
+            btnExcluir.Click += btnExcluir_Click;
+            // 
             // bntEditar
             // 
             bntEditar.Click += BntEditar_Click;

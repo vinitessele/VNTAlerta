@@ -26,7 +26,7 @@ namespace VNT_CentralDeNotificacao
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            IdPesquisa = dataGridView1.SelectedRows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            IdPesquisa = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
             this.Close();
         }
     }
