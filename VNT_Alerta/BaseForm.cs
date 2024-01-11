@@ -17,12 +17,12 @@ namespace VNT_CentralDeNotificacao
             InitializeComponent();
         }
 
-        private void btnNovo_Click(object sender, EventArgs e)
+        private void BtnNovo_Click(object sender, EventArgs e)
         {
             HabilitaGroupBox();
         }
 
-        private void bntEditar_Click(object sender, EventArgs e)
+        private void BntEditar_Click(object sender, EventArgs e)
         {
             HabilitaGroupBox();
         }
@@ -36,17 +36,17 @@ namespace VNT_CentralDeNotificacao
             groupBox1.Enabled = true;
         }
 
-        private void bntSalvar_Click(object sender, EventArgs e)
+        private void BntSalvar_Click(object sender, EventArgs e)
         {
             DesabilitaGroupBox();
         }
 
-        private void btnExcluir_Click(object sender, EventArgs e)
+        private void BtnExcluir_Click(object sender, EventArgs e)
         {
             DesabilitaGroupBox();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void BtnCancelar_Click(object sender, EventArgs e)
         {
             DesabilitaGroupBox();
         }

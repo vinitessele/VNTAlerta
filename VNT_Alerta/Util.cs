@@ -1,8 +1,59 @@
 ﻿
+using Microsoft.Toolkit.Uwp.Notifications;
+using System.Net.Mail;
+
 namespace VNT_CentralDeNotificacao
 {
     public class Util
     {
+        private void NotificacaoWindow()
+        {
+            new ToastContentBuilder()
+         .AddArgument("conversationId", 9813)
+         .AddText("teste")
+         .AddText("teste")
+         .Show(toast =>
+         {
+             toast.ExpirationTime = DateTime.Now.AddDays(1);
+         });
+        }
+        private void EnviaEmail()
+        {
+            // Configurações do servidor SMTP
+            string smtpServer = "smtp.gmail.com";
+            int smtpPort = 587;
+            string smtpUsername = "vntnotificacao@gmail.com";
+            string smtpPassword = "sifw qwdn xbmc gebh";
+
+            // Endereço de email do remetente
+            string fromEmail = "vntnotificacao@gmail.com";
+
+            // Endereço de email do destinatário
+            string toEmail = "vinicius_tessele@hotmail.com";
+
+            // Criar objeto de mensagem
+            MailMessage message = new MailMessage(fromEmail, toEmail);
+            message.Subject = "Assunto do email";
+            message.Body = "Conteúdo do email";
+
+            // Configurar cliente SMTP
+            SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
+            smtp.UseDefaultCredentials = false;
+            smtp.EnableSsl = true; // Use SSL para conexão segura
+            smtp.Credentials = new System.Net.NetworkCredential(smtpUsername, smtpPassword);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.EnableSsl = true;
+            try
+            {
+                // Enviar email
+                smtp.Send(message);
+                Console.WriteLine("Email enviado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao enviar o email: " + ex.Message);
+            }
+        }
         public static string InsertEstado()
         {
             return "Insert into Estado (id, Nome, Uf, Regiao) values " +

@@ -123,6 +123,7 @@
             MainMenuStrip = menuStrip1;
             Name = "FrmMenu";
             Text = "FormMenu";
+            WindowState = FormWindowState.Maximized;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

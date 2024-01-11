@@ -1,6 +1,6 @@
 ﻿namespace VNT_CentralDeNotificacao
 {
-    partial class FrmCfgNotificacao
+    partial class ConsultaTipoRegistro
     {
         /// <summary>
         /// Required designer variable.
@@ -28,19 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
-            // btnPesquisar
+            // textBox1
             // 
-            btnPesquisar.Click += btnPesquisar_Click;
+            textBoxPesquisa.TextChanged += textBoxPesquisa_TextChanged;
             // 
-            // FrmCfgNotificacao
+            // ConsultaTipoRegistro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Name = "FrmCfgNotificacao";
-            Text = "FrmCfgNotificao";
+            Name = "ConsultaTipoRegistro";
+            Text = "Consulta Tipo Registro";
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
         }
 

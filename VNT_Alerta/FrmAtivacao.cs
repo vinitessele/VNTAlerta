@@ -18,19 +18,19 @@ namespace VNT_CentralDeNotificacao
         const string Teste = "T";
 
         private static SQLiteConnection sqliteConnection;
-        string dbName = "bd.sqlite";
-        string startupPath = Environment.CurrentDirectory + "\\DB\\";
-        string dataBasePath = string.Empty;
+        private string dbName = "bd.sqlite";
+        private string startupPath = Environment.CurrentDirectory + "\\DB\\";
+        private string dataBasePath = string.Empty;
 
-        string chave = "Ajasklskeoessinmieosiusfoiweuwww";
-        string empresa = "Empresa Teste";
-        string cnpj = "12.123.123/0001-00";
-        string chaveAcesso = "111-222-333-444-555-666-777-888-999";
-        string statusAtivacao = Teste;
+        private string chave = "Ajasklskeoessinmieosiusfoiweuwww";
+        private string empresa = "Empresa Teste";
+        private string cnpj = "12.123.123/0001-00";
+        private string chaveAcesso = "111-222-333-444-555-666-777-888-999";
+        private  string statusAtivacao = Teste;
         int idCidade = 4127700;
         DateTime dataInicioAtivacao = DateTime.Now;
         DateTime expira = DateTime.Now.AddDays(30);
-        string identificacaoCliente = "Teste0000";
+        private string identificacaoCliente = "Teste0000";
 
         public FormAtivacao()
         {
@@ -39,13 +39,11 @@ namespace VNT_CentralDeNotificacao
             CriarTabelaSQlite();
             AdicionaEstados();
             AdicionaCidades();
-            EnviaEmail();
-            NotificacaoWindow();
             VerificaLicenca();
 
             labelVersao.Text = "Versão: 24.1.0";
 
-            FrmMenu fr = new FrmMenu();
+            FrmMenu fr = new();
             fr.Show();
             this.Hide();
         }
@@ -59,16 +57,14 @@ namespace VNT_CentralDeNotificacao
         }
         private void OpenFileButton_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "vnt files (*.vnt)|*.vnt";
-                openFileDialog.Title = "Selecione o arquivo de licença";
+            using OpenFileDialog openFileDialog = new();
+            openFileDialog.Filter = "vnt files (*.vnt)|*.vnt";
+            openFileDialog.Title = "Selecione o arquivo de licença";
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string selectedFilePath = openFileDialog.FileName;
-                    FiletextBox.Text = selectedFilePath;
-                }
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFilePath = openFileDialog.FileName;
+                FiletextBox.Text = selectedFilePath;
             }
         }
         private void VerificaLicenca()
@@ -78,7 +74,7 @@ namespace VNT_CentralDeNotificacao
 
             try
             {
-                Crypt crypt = new Crypt();
+                Crypt crypt = new();
 
                 if (!Directory.Exists(pathLicenca))
                     Directory.CreateDirectory(pathLicenca);
@@ -107,7 +103,7 @@ namespace VNT_CentralDeNotificacao
                         DaoCfgEmpresa e = db.cfgEmpresa.FirstOrDefault();
 
                         string line;
-                        StreamReader sr = new StreamReader(arquivoLicenca);
+                        StreamReader sr = new(arquivoLicenca);
                         line = sr.ReadLine();
                         while (line != null)
                         {
@@ -209,20 +205,18 @@ namespace VNT_CentralDeNotificacao
         }
         private void AddDadosEmpresaNova()
         {
-            using (var db = new Context())
-            {
-                DaoCfgEmpresa e = new DaoCfgEmpresa();
-                e.NomeEmpresa = empresa;
-                e.Cnpj = cnpj;
-                e.chaveAcesso = chaveAcesso;
-                e.statusAtivacao = statusAtivacao;
-                e.dataInicioAtivacao = dataInicioAtivacao;
-                e.dataFimAtivacao = expira;
-                e.idCidade = idCidade;
-                e.identificacaoCliente = identificacaoCliente;
-                db.cfgEmpresa.Add(e);
-                db.SaveChanges();
-            }
+            using var db = new Context();
+            DaoCfgEmpresa e = new();
+            e.NomeEmpresa = empresa;
+            e.Cnpj = cnpj;
+            e.chaveAcesso = chaveAcesso;
+            e.statusAtivacao = statusAtivacao;
+            e.dataInicioAtivacao = dataInicioAtivacao;
+            e.dataFimAtivacao = expira;
+            e.idCidade = idCidade;
+            e.identificacaoCliente = identificacaoCliente;
+            db.cfgEmpresa.Add(e);
+            db.SaveChanges();
         }
         private void CriaBancoDados()
         {
@@ -251,138 +245,88 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                using (var cmd = DbConnection(dataBasePath).CreateCommand())
-                {
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS estado(id integer not null primary key autoincrement," +
-                                                                        " Nome  Varchar(200)," +
-                                                                        " Uf char(2)," +
-                                                                        " Regiao integer)";
-                    cmd.ExecuteNonQuery();
+                using var cmd = DbConnection(dataBasePath).CreateCommand();
+                cmd.CommandText = "CREATE TABLE IF NOT EXISTS estado(id integer not null primary key autoincrement," +
+                                                                    " Nome  Varchar(200)," +
+                                                                    " Uf char(2)," +
+                                                                    " Regiao integer)";
+                cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS cidade(id integer not null primary key autoincrement," +
-                                                                        " Nome  Varchar(200)," +
-                                                                        " idEstado integer," +
-                                                                        " foreign key (idEstado) references estado(id) )";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS cfgEmpresa(id integer not null primary key autoincrement," +
-                                                                            " nomeEmpresa  Varchar(200)," +
-                                                                            " cnpj Varchar(16)," +
-                                                                            " atividade Varchar(200)," +
-                                                                            " endereco Varchar(200)," +
-                                                                            " bairro varchar(100)," +
-                                                                            " cep varchar(9)," +
-                                                                            " idCidade integer," +
-                                                                            " telefone Varchar(15)," +
-                                                                            " celular Varchar(15)," +
-                                                                            " chaveAcesso Varchar(500)," +
-                                                                            " statusAtivacao Varchar(100)," +
-                                                                            " dataInicioAtivacao DATETEXT," +
-                                                                            " dataFimAtivacao DATETEXT," +
-                                                                            " identificacaoCliente Varchar(15)," +
-                                                                            " foreign key (idCidade) references cidade(id))";
-                    cmd.ExecuteNonQuery();
+                cmd.CommandText = "CREATE TABLE IF NOT EXISTS cidade(id integer not null primary key autoincrement," +
+                                                                    " Nome  Varchar(200)," +
+                                                                    " idEstado integer," +
+                                                                    " foreign key (idEstado) references estado(id) )";
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = "CREATE TABLE IF NOT EXISTS cfgEmpresa(id integer not null primary key autoincrement," +
+                                                                        " nomeEmpresa  Varchar(200)," +
+                                                                        " cnpj Varchar(16)," +
+                                                                        " atividade Varchar(200)," +
+                                                                        " endereco Varchar(200)," +
+                                                                        " bairro varchar(100)," +
+                                                                        " cep varchar(9)," +
+                                                                        " idCidade integer," +
+                                                                        " telefone Varchar(15)," +
+                                                                        " celular Varchar(15)," +
+                                                                        " chaveAcesso Varchar(500)," +
+                                                                        " statusAtivacao Varchar(100)," +
+                                                                        " dataInicioAtivacao DATETEXT," +
+                                                                        " dataFimAtivacao DATETEXT," +
+                                                                        " identificacaoCliente Varchar(15)," +
+                                                                        " foreign key (idCidade) references cidade(id))";
+                cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS empresa(id integer not null primary key autoincrement," +
-                                                                            " razaoSocial Varchar(200)," +
-                                                                            " nomeFantasia Varchar(200)," +
-                                                                            " cnpj Varchar(16)," +
-                                                                            " atividade Varchar(200)," +
-                                                                            " endereco Varchar(200)," +
-                                                                            " bairro varchar(100)," +
-                                                                            " cep varchar(9)," +
-                                                                            " idCidade integer not null," +
-                                                                            " socios Varchar(500)," +
-                                                                            " percentualSocios Varchar(500)," +
-                                                                            " telefone Varchar(15)," +
-                                                                            " celular Varchar(15)," +
-                                                                            " dataAbertura DATETEXT," +
-                                                                            " observacao Varchar(500)," +
-                                                                            " foreign key (idCidade) references cidade(id))";
+                cmd.CommandText = "CREATE TABLE IF NOT EXISTS empresa(id integer not null primary key autoincrement," +
+                                                                        " razaoSocial Varchar(200)," +
+                                                                        " nomeFantasia Varchar(200)," +
+                                                                        " cnpj Varchar(16)," +
+                                                                        " atividade Varchar(200)," +
+                                                                        " endereco Varchar(200)," +
+                                                                        " bairro varchar(100)," +
+                                                                        " cep varchar(9)," +
+                                                                        " idCidade integer not null," +
+                                                                        " socios Varchar(500)," +
+                                                                        " percentualSocios Varchar(500)," +
+                                                                        " telefone Varchar(15)," +
+                                                                        " celular Varchar(15)," +
+                                                                        " dataAbertura DATETEXT," +
+                                                                        " observacao Varchar(500)," +
+                                                                        " foreign key (idCidade) references cidade(id))";
 
-                    cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS cfgNotificacao(id integer not null primary key autoincrement," +
-                                                                                " emailFrom  VarChar(100)," +
-                                                                                " emailTo VarChar(300)," +
-                                                                                " emailSubject  VarChar(100)," +
-                                                                                " emailBody  VarChar(500)," +
-                                                                                " smtp  VarChar(100)," +
-                                                                                " notificacaoWindows char(1)," +
-                                                                                " notificacaoEmail char(1)," +
-                                                                                " diasNotificacao integer not null)";
-                    cmd.ExecuteNonQuery();
+                cmd.CommandText = "CREATE TABLE IF NOT EXISTS cfgNotificacao(id integer not null primary key autoincrement," +
+                                                                            " emailFrom  VarChar(100)," +
+                                                                            " emailTo VarChar(300)," +
+                                                                            " emailSubject  VarChar(100)," +
+                                                                            " emailBody  VarChar(500)," +
+                                                                            " smtp  VarChar(100)," +
+                                                                            " notificacaoWindows char(1)," +
+                                                                            " notificacaoEmail char(1)," +
+                                                                            " diasNotificacao integer not null)";
+                cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS tipoRegistro(id integer not null primary key autoincrement," +
-                                                                               " descricao  VarChar(200))";
+                cmd.CommandText = "CREATE TABLE IF NOT EXISTS tipoRegistro(id integer not null primary key autoincrement," +
+                                                                           " descricao  VarChar(200))";
 
-                    cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS notificacao(id integer not null primary key autoincrement," +
-                                                                             " descricao  VarChar(200) not null," +
-                                                                             " idTipoRegistro integer not null," +
-                                                                             " idEmpesa integer not null," +
-                                                                             " dataInicalProcesso DATETEXT," +
-                                                                             " dataFinalProcesso DATETEXT, " +
-                                                                             " dataNotificacao DATETEXT, " +
-                                                                             " observacao Varchar(500)," +
-                                                                             " notificacaoFinalizada char(1)," +
-                                                                             " foreign key (idTipoRegistro) references TipoRegistro(id)," +
-                                                                             " foreign key(idEmpesa) references Empresa(id))";
+                cmd.CommandText = "CREATE TABLE IF NOT EXISTS notificacao(id integer not null primary key autoincrement," +
+                                                                         " descricao  VarChar(200) not null," +
+                                                                         " idTipoRegistro integer not null," +
+                                                                         " idEmpesa integer not null," +
+                                                                         " dataInicalProcesso DATETEXT," +
+                                                                         " dataFinalProcesso DATETEXT, " +
+                                                                         " dataNotificacao DATETEXT, " +
+                                                                         " observacao Varchar(500)," +
+                                                                         " notificacaoFinalizada char(1)," +
+                                                                         " foreign key (idTipoRegistro) references TipoRegistro(id)," +
+                                                                         " foreign key(idEmpesa) references Empresa(id))";
 
-                    cmd.ExecuteNonQuery();
-                }
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-        }
-        private void NotificacaoWindow()
-        {
-            new ToastContentBuilder()
-         .AddArgument("conversationId", 9813)
-         .AddText("teste")
-         .AddText("teste")
-         .Show(toast =>
-         {
-             toast.ExpirationTime = DateTime.Now.AddDays(1);
-         });
-        }
-        private void EnviaEmail()
-        {
-            // Configurações do servidor SMTP
-            string smtpServer = "smtp.gmail.com";
-            int smtpPort = 587;
-            string smtpUsername = "vntnotificacao@gmail.com";
-            string smtpPassword = "sifw qwdn xbmc gebh";
-
-            // Endereço de email do remetente
-            string fromEmail = "vntnotificacao@gmail.com";
-
-            // Endereço de email do destinatário
-            string toEmail = "vinicius_tessele@hotmail.com";
-
-            // Criar objeto de mensagem
-            MailMessage message = new MailMessage(fromEmail, toEmail);
-            message.Subject = "Assunto do email";
-            message.Body = "Conteúdo do email";
-
-            // Configurar cliente SMTP
-            SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
-            smtp.UseDefaultCredentials = false;
-            smtp.EnableSsl = true; // Use SSL para conexão segura
-            smtp.Credentials = new System.Net.NetworkCredential(smtpUsername, smtpPassword);
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.EnableSsl = true;
-            try
-            {
-                // Enviar email
-                smtp.Send(message);
-                Console.WriteLine("Email enviado com sucesso!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Erro ao enviar o email: " + ex.Message);
             }
         }
         private void AdicionaEstados()
@@ -396,12 +340,10 @@ namespace VNT_CentralDeNotificacao
             {
                 try
                 {
-                    using (var cmd = DbConnection(dataBasePath).CreateCommand())
-                    {
-                        cmd.CommandText = Util.InsertEstado();
+                    using var cmd = DbConnection(dataBasePath).CreateCommand();
+                    cmd.CommandText = Util.InsertEstado();
 
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
@@ -421,11 +363,9 @@ namespace VNT_CentralDeNotificacao
             {
                 try
                 {
-                    using (var cmd = DbConnection(dataBasePath).CreateCommand())
-                    {
-                        cmd.CommandText = Util.InsertCidades();
-                        cmd.ExecuteNonQuery();
-                    }
+                    using var cmd = DbConnection(dataBasePath).CreateCommand();
+                    cmd.CommandText = Util.InsertCidades();
+                    cmd.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {

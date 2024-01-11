@@ -19,30 +19,26 @@ namespace VNT_CentralDeNotificacao
 
         private void notificaçãoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmCadNotificacao fr = new FrmCadNotificacao();
+            FrmCadNotificacao fr = new();
             fr.Show();
-            this.Hide();
         }
 
         private void empresasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmCadEmpresa fr = new FrmCadEmpresa();
+            FrmCadEmpresa fr = new();
             fr.Show();
-            this.Hide();
         }
 
         private void tipoRegistroToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmTipoRegistro fr = new FrmTipoRegistro();
+            FrmTipoRegistro fr = new();
             fr.Show();
-            this.Hide();
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            FrmCfgNotificacao fr = new FrmCfgNotificacao();
+            FrmCfgNotificacao fr = new();
             fr.Show();
-            this.Hide();
         }
     }
 }

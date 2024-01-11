@@ -37,12 +37,14 @@
             btnNovo = new Button();
             groupBox1 = new GroupBox();
             paneltop = new Panel();
+            btnPesquisar = new Button();
             panelMenu.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
             // 
             panelMenu.BackColor = SystemColors.ActiveBorder;
+            panelMenu.Controls.Add(btnPesquisar);
             panelMenu.Controls.Add(bntEditar);
             panelMenu.Controls.Add(btnCancelar);
             panelMenu.Controls.Add(btnExcluir);
@@ -65,7 +67,7 @@
             bntEditar.Size = new Size(33, 35);
             bntEditar.TabIndex = 1;
             bntEditar.UseVisualStyleBackColor = false;
-            bntEditar.Click += bntEditar_Click;
+            bntEditar.Click += BntEditar_Click;
             // 
             // btnCancelar
             // 
@@ -77,7 +79,7 @@
             btnCancelar.Size = new Size(33, 35);
             btnCancelar.TabIndex = 4;
             btnCancelar.UseVisualStyleBackColor = false;
-            btnCancelar.Click += btnCancelar_Click;
+            btnCancelar.Click += BtnCancelar_Click;
             // 
             // btnExcluir
             // 
@@ -89,7 +91,7 @@
             btnExcluir.Size = new Size(33, 35);
             btnExcluir.TabIndex = 3;
             btnExcluir.UseVisualStyleBackColor = false;
-            btnExcluir.Click += btnExcluir_Click;
+            btnExcluir.Click += BtnExcluir_Click;
             // 
             // bntSalvar
             // 
@@ -101,7 +103,7 @@
             bntSalvar.Size = new Size(33, 35);
             bntSalvar.TabIndex = 2;
             bntSalvar.UseVisualStyleBackColor = false;
-            bntSalvar.Click += bntSalvar_Click;
+            bntSalvar.Click += BntSalvar_Click;
             // 
             // btnNovo
             // 
@@ -113,7 +115,7 @@
             btnNovo.Size = new Size(33, 35);
             btnNovo.TabIndex = 0;
             btnNovo.UseVisualStyleBackColor = false;
-            btnNovo.Click += btnNovo_Click;
+            btnNovo.Click += BtnNovo_Click;
             // 
             // groupBox1
             // 
@@ -123,7 +125,6 @@
             groupBox1.Size = new Size(776, 356);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
-            groupBox1.Text = "BaseForm";
             // 
             // paneltop
             // 
@@ -134,14 +135,25 @@
             paneltop.Size = new Size(800, 15);
             paneltop.TabIndex = 2;
             // 
+            // btnPesquisar
+            // 
+            btnPesquisar.BackColor = SystemColors.AppWorkspace;
+            btnPesquisar.BackgroundImage = (Image)resources.GetObject("btnPesquisar.BackgroundImage");
+            btnPesquisar.BackgroundImageLayout = ImageLayout.Center;
+            btnPesquisar.Location = new Point(384, 13);
+            btnPesquisar.Name = "btnPesquisar";
+            btnPesquisar.Size = new Size(33, 35);
+            btnPesquisar.TabIndex = 5;
+            btnPesquisar.UseVisualStyleBackColor = false;
+            // 
             // BaseForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(paneltop);
-            Controls.Add(groupBox1);
             Controls.Add(panelMenu);
+            Controls.Add(groupBox1);
             Name = "BaseForm";
             Text = "BaseForm";
             panelMenu.ResumeLayout(false);
@@ -151,12 +163,13 @@
         #endregion
 
         private Panel panelMenu;
-        private GroupBox groupBox1;
-        private Button bntSalvar;
-        private Button btnNovo;
-        private Button btnCancelar;
-        private Button btnExcluir;
         private Panel paneltop;
-        private Button bntEditar;
+        protected GroupBox groupBox1;
+        protected Button bntSalvar;
+        protected Button btnNovo;
+        protected Button btnCancelar;
+        protected Button btnExcluir;
+        protected Button bntEditar;
+        protected Button btnPesquisar;
     }
 }
