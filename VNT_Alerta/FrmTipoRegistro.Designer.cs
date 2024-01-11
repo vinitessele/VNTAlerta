@@ -50,6 +50,10 @@
             // 
             btnNovo.Click += BtnNovo_Click;
             // 
+            // btnCancelar
+            // 
+            btnCancelar.Click += btnCancelar_Click;
+            // 
             // btnExcluir
             // 
             btnExcluir.Click += btnExcluir_Click;

@@ -49,7 +49,6 @@ namespace VNT_CentralDeNotificacao
             {
                 throw;
             }
-
         }
         public List<DaoTipoRegistro> GetTipoRegistro(string texto)
         {
@@ -95,6 +94,33 @@ namespace VNT_CentralDeNotificacao
                 n.notificacaoWindows = dados.notificacaoWindows;
                 n.notificacaoEmail = dados.notificacaoEmail;
                 db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public void DeleteCfgNotificacao(int id)
+        {
+            try
+            {
+                Context db = new();
+                DaoCfgNotificacao t = db.cfgNotificacao.FirstOrDefault(p => p.Id == id);
+                db.cfgNotificacao.Remove(t);
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public DaoCfgNotificacao getCfgNotificao()
+        {
+            try
+            {
+                Context db = new();
+                DaoCfgNotificacao t = db.cfgNotificacao.FirstOrDefault();
+                return t;
             }
             catch
             {

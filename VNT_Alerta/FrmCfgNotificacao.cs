@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace VNT_CentralDeNotificacao
 {
@@ -45,9 +46,9 @@ namespace VNT_CentralDeNotificacao
                 d.emailBody = textMensagem.Text;
                 if (textDias.Text != string.Empty)
                     d.DiasNotificacao = int.Parse(textDias.Text);
-                if (checkBoxNotificacaoWindows.Checked)
+                if (checkBoxNotificacaoWindows.Checked == true)
                     d.notificacaoWindows = "S";
-                if (checkBoxNotificacaoEmail.Checked)
+                if (checkBoxNotificacaoEmail.Checked == true)
                     d.notificacaoEmail = "S";
 
                 if (textId.Text == string.Empty)
@@ -60,6 +61,46 @@ namespace VNT_CentralDeNotificacao
                     m.AlterCfgNotificacao(d);
                 }
                 MessageBox.Show("Registro salvo com sucesso");
+            }
+            catch { throw; }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = 0;
+                if (textId.Text != string.Empty)
+                {
+                    id = int.Parse(textId.Text);
+                }
+                if (id != 0)
+                {
+                    Model m = new();
+
+                    m.DeleteTipoRegistro(id);
+
+                    MessageBox.Show("Registro Excluido com sucesso");
+                }
+            }
+            catch { throw; }
+        }
+
+        private void FrmCfgNotificacao_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                Model m = new();
+                DaoCfgNotificacao d = m.getCfgNotificao();
+                textId.Text = d.Id.ToString();
+                textPara.Text = d.emailTo;
+                textAssunto.Text = d.emailSubject;
+                textMensagem.Text = d.emailBody;
+                textDias.Text = d.DiasNotificacao.ToString();
+                if (d.notificacaoWindows == "S")
+                    checkBoxNotificacaoWindows.Checked = true;
+                if (d.notificacaoEmail == "S")
+                    checkBoxNotificacaoEmail.Checked = true;
             }
             catch { throw; }
         }

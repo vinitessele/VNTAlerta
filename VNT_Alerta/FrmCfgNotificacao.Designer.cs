@@ -68,6 +68,10 @@
             // 
             btnNovo.Click += btnNovo_Click;
             // 
+            // btnExcluir
+            // 
+            btnExcluir.Click += btnExcluir_Click;
+            // 
             // bntEditar
             // 
             bntEditar.Click += bntEditar_Click;
@@ -194,6 +198,7 @@
             ClientSize = new Size(800, 450);
             Name = "FrmCfgNotificacao";
             Text = "***Configuração do envio de notificação***";
+            Load += FrmCfgNotificacao_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);

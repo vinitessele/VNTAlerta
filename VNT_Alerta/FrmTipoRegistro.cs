@@ -65,7 +65,7 @@ namespace VNT_CentralDeNotificacao
 
             if (textID.Text != string.Empty)
                 descricao = get.GetTipoRegistroID(textID.Text);
-            
+
             textDescricao.Text = descricao;
         }
 
@@ -88,6 +88,11 @@ namespace VNT_CentralDeNotificacao
                 }
             }
             catch { throw; }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            textDescricao.Text= string.Empty;
         }
     }
 }
