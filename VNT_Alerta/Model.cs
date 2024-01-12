@@ -50,7 +50,7 @@ namespace VNT_CentralDeNotificacao
                 throw;
             }
         }
-        public List<DaoTipoRegistro> GetTipoRegistro(string texto)
+        public List<DaoTipoRegistro> GetListTipoRegistro(string texto)
         {
             Context db = new Context();
             var q = from t in db.tipoRegistro
@@ -62,10 +62,10 @@ namespace VNT_CentralDeNotificacao
                     };
             return q.ToList();
         }
-        public string GetTipoRegistroID(string texto)
+        public string GetTipoRegistroID(string id)
         {
             Context db = new Context();
-            string descricao = db.tipoRegistro.FirstOrDefault(p => p.Id == int.Parse(texto)).Descricao;
+            string descricao = db.tipoRegistro.FirstOrDefault(p => p.Id == int.Parse(id)).Descricao;
             return descricao;
         }
         public void SetCfgNotificacao(DaoCfgNotificacao dados)
@@ -126,6 +126,99 @@ namespace VNT_CentralDeNotificacao
             {
                 throw;
             }
+        }
+        public void setEmpresa(DaoEmpresa dados)
+        {
+            try
+            {
+                Context db = new();
+                db.empresa.Add(dados);
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public void AlterEmpresa(DaoEmpresa dados)
+        {
+            try
+            {
+                Context db = new();
+                DaoEmpresa d = db.empresa.FirstOrDefault(p => p.Id == dados.Id);
+
+                d.RazaoSocial = dados.RazaoSocial;
+                d.NomeFantasia = dados.NomeFantasia;
+                d.Cnpj = dados.Cnpj;
+                d.Endereco = dados.Endereco;
+                d.Atividade = dados.Atividade;
+                d.bairro = dados.bairro;
+                d.cep = dados.cep;
+                d.Socios = dados.Socios;
+                d.PercentualSocios = dados.PercentualSocios;
+                d.Telefone = dados.Telefone;
+                d.Celular = dados.Celular;
+                d.DataAbertura = dados.DataAbertura;
+                d.Observacao = dados.Observacao;
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public void DeleteEmpresa(int id)
+        {
+            try
+            {
+                Context db = new();
+                DaoEmpresa t = db.empresa.FirstOrDefault(p => p.Id == id);
+                db.empresa.Remove(t);
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+
+            }
+        }
+        public List<DaoEmpresa> GetListEmpresaNome(string texto)
+        {
+            Context db = new Context();
+            var q = from t in db.empresa
+                    where t.RazaoSocial.Contains(texto)
+                    select new DaoEmpresa
+                    {
+                        Id = t.Id,
+                        RazaoSocial = t.RazaoSocial,
+                        NomeFantasia = t.NomeFantasia                        
+                    };
+            return q.ToList();
+        }
+
+        public List<DaoCidade> getAllCidades()
+        {
+            Context db = new Context();
+
+            var q = (from c in db.cidade
+                     join e in db.estado
+                     on c.IdEstado equals e.Id into estado
+                     from e in estado.DefaultIfEmpty()
+                     select new DaoCidade()
+                     {
+                         Id = c.Id,
+                         Nome = c.Nome + "/" + e.Uf,
+                         IdEstado = c.Id
+                     }).OrderBy(p => p.Nome);
+
+            return q.ToList();
+        }
+
+        public DaoEmpresa GetEmpresaId(int id)
+        {
+            Context db = new Context();
+            return db.empresa.Where(p => p.Id == id).FirstOrDefault();
         }
     }
 }

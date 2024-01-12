@@ -21,6 +21,7 @@ namespace VNT_CentralDeNotificacao
         private void BtnNovo_Click(object sender, EventArgs e)
         {
             textDescricao.Focus();
+            textID.Text = string.Empty;
         }
 
         private void BntEditar_Click(object sender, EventArgs e)
@@ -77,9 +78,6 @@ namespace VNT_CentralDeNotificacao
                 if (textID.Text != string.Empty)
                 {
                     id = int.Parse(textID.Text);
-                }
-                if (id != 0)
-                {
                     Model m = new();
 
                     m.DeleteTipoRegistro(id);

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
             panelMenu = new Panel();
+            btnPesquisar = new Button();
             bntEditar = new Button();
             btnCancelar = new Button();
             btnExcluir = new Button();
@@ -37,7 +38,6 @@
             btnNovo = new Button();
             groupBox1 = new GroupBox();
             paneltop = new Panel();
-            btnPesquisar = new Button();
             panelMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,6 +56,17 @@
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(800, 61);
             panelMenu.TabIndex = 0;
+            // 
+            // btnPesquisar
+            // 
+            btnPesquisar.BackColor = SystemColors.AppWorkspace;
+            btnPesquisar.BackgroundImage = (Image)resources.GetObject("btnPesquisar.BackgroundImage");
+            btnPesquisar.BackgroundImageLayout = ImageLayout.Center;
+            btnPesquisar.Location = new Point(384, 13);
+            btnPesquisar.Name = "btnPesquisar";
+            btnPesquisar.Size = new Size(33, 35);
+            btnPesquisar.TabIndex = 5;
+            btnPesquisar.UseVisualStyleBackColor = false;
             // 
             // bntEditar
             // 
@@ -135,17 +146,6 @@
             paneltop.Size = new Size(800, 15);
             paneltop.TabIndex = 2;
             // 
-            // btnPesquisar
-            // 
-            btnPesquisar.BackColor = SystemColors.AppWorkspace;
-            btnPesquisar.BackgroundImage = (Image)resources.GetObject("btnPesquisar.BackgroundImage");
-            btnPesquisar.BackgroundImageLayout = ImageLayout.Center;
-            btnPesquisar.Location = new Point(384, 13);
-            btnPesquisar.Name = "btnPesquisar";
-            btnPesquisar.Size = new Size(33, 35);
-            btnPesquisar.TabIndex = 5;
-            btnPesquisar.UseVisualStyleBackColor = false;
-            // 
             // BaseForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -155,6 +155,7 @@
             Controls.Add(panelMenu);
             Controls.Add(groupBox1);
             Name = "BaseForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "BaseForm";
             panelMenu.ResumeLayout(false);
             ResumeLayout(false);

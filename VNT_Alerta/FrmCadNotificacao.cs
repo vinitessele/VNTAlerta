@@ -16,5 +16,16 @@ namespace VNT_CentralDeNotificacao
         {
             InitializeComponent();
         }
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            textDescricao.Focus();
+            textId.Text = string.Empty;
+        }
+
+        private void bntEditar_Click(object sender, EventArgs e)
+        {
+            textDescricao.Focus();
+        }
     }
 }

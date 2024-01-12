@@ -85,14 +85,14 @@
             label1.AutoSize = true;
             label1.Location = new Point(6, 33);
             label1.Name = "label1";
-            label1.Size = new Size(17, 15);
+            label1.Size = new Size(18, 15);
             label1.TabIndex = 0;
-            label1.Text = "Id";
+            label1.Text = "ID";
             // 
             // textId
             // 
             textId.Enabled = false;
-            textId.Location = new Point(62, 30);
+            textId.Location = new Point(29, 25);
             textId.Name = "textId";
             textId.Size = new Size(100, 23);
             textId.TabIndex = 1;

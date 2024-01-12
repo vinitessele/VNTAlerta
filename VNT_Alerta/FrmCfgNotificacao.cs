@@ -73,9 +73,6 @@ namespace VNT_CentralDeNotificacao
                 if (textId.Text != string.Empty)
                 {
                     id = int.Parse(textId.Text);
-                }
-                if (id != 0)
-                {
                     Model m = new();
 
                     m.DeleteTipoRegistro(id);

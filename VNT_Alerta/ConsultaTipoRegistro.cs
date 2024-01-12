@@ -20,7 +20,7 @@ namespace VNT_CentralDeNotificacao
         private void textBoxPesquisa_TextChanged(object sender, EventArgs e)
         {
             Model get = new();
-            List<DaoTipoRegistro> d = get.GetTipoRegistro(textBoxPesquisa.Text);
+            List<DaoTipoRegistro> d = get.GetListTipoRegistro(textBoxPesquisa.Text);
             CarregarGrid(d);
         }
 

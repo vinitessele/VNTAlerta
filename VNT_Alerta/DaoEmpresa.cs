@@ -11,16 +11,21 @@ namespace VNT_CentralDeNotificacao
     public class DaoEmpresa
     {
         public int Id { get; set; }
-        public string NomeEmpresa { get; set; }
-        public string Cnpj { get; set; }
-        public string Atividade { get; set; }
-        public string Endereco { get; set; }
-        public string bairro { get; set; }
-        public string cep { get; set; }
-        public int idCidade { get; set; }
-        public string Telefone { get; set; }
-        public string Celular { get; set; }
-        public string Obs { get; set; }
+
+        public string? RazaoSocial { get; set; }
+        public string? NomeFantasia { get; set; }
+        public string? Cnpj { get; set; }
+        public string? Atividade { get; set; }
+        public string? Endereco { get; set; }
+        public string? bairro { get; set; }
+        public string? cep { get; set; }
+        public int? idCidade { get; set; }
+        public string? Telefone { get; set; }
+        public string? Celular { get; set; }
+        public string? Socios { get; set; }
+        public string? PercentualSocios { get; set; }
+        public DateTime? DataAbertura { get; set; }
+        public string? Observacao { get; set; }
 
     }
 }
