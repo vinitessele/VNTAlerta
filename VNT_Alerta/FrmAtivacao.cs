@@ -117,7 +117,7 @@ namespace VNT_CentralDeNotificacao
                                 }
                                 else
                                 {
-                                    throw new System.InvalidOperationException();
+                                    throw new InvalidOperationException();
                                 }
                                 textoDescriptografado = crypt.Decrypt(line, chave);
                                 if (textoDescriptografado == e.Cnpj)
@@ -127,7 +127,7 @@ namespace VNT_CentralDeNotificacao
                                 }
                                 else
                                 {
-                                    throw new System.InvalidOperationException(msg);
+                                    throw new InvalidOperationException(msg);
                                 }
                                 textoDescriptografado = crypt.Decrypt(line, chave);
                                 if (textoDescriptografado == e.chaveAcesso)
@@ -136,7 +136,7 @@ namespace VNT_CentralDeNotificacao
                                 }
                                 else
                                 {
-                                    throw new System.InvalidOperationException(msg);
+                                    throw new InvalidOperationException(msg);
                                 }
                                 textoDescriptografado = crypt.Decrypt(line, chave);
                                 if (textoDescriptografado == e.statusAtivacao)
@@ -145,7 +145,7 @@ namespace VNT_CentralDeNotificacao
                                 }
                                 else
                                 {
-                                    throw new System.InvalidOperationException(msg);
+                                    throw new InvalidOperationException(msg);
                                 }
                                 textoDescriptografado = crypt.Decrypt(line, chave);
                                 if (textoDescriptografado == e.idCidade.ToString())
@@ -154,7 +154,7 @@ namespace VNT_CentralDeNotificacao
                                 }
                                 else
                                 {
-                                    throw new System.InvalidOperationException(msg);
+                                    throw new InvalidOperationException(msg);
                                 }
                                 textoDescriptografado = crypt.Decrypt(line, chave);
                                 if (textoDescriptografado == e.dataInicioAtivacao.ToString())
@@ -163,7 +163,7 @@ namespace VNT_CentralDeNotificacao
                                 }
                                 else
                                 {
-                                    throw new System.InvalidOperationException(msg);
+                                    throw new InvalidOperationException(msg);
                                 }
                                 textoDescriptografado = crypt.Decrypt(line, chave);
                                 if (textoDescriptografado == e.dataFimAtivacao.ToString())
@@ -173,7 +173,7 @@ namespace VNT_CentralDeNotificacao
                                 }
                                 else
                                 {
-                                    throw new System.InvalidOperationException(msg);
+                                    throw new InvalidOperationException(msg);
                                 }
                                 textoDescriptografado = crypt.Decrypt(line, chave);
                                 if (textoDescriptografado == e.identificacaoCliente)
@@ -313,14 +313,14 @@ namespace VNT_CentralDeNotificacao
                 cmd.CommandText = "CREATE TABLE IF NOT EXISTS notificacao(id integer not null primary key autoincrement," +
                                                                          " descricao  VarChar(200) not null," +
                                                                          " idTipoRegistro integer not null," +
-                                                                         " idEmpesa integer not null," +
+                                                                         " idEmpresa integer not null," +
                                                                          " dataInicalProcesso DATETEXT," +
                                                                          " dataFinalProcesso DATETEXT, " +
                                                                          " dataNotificacao DATETEXT, " +
                                                                          " observacao Varchar(500)," +
                                                                          " notificacaoFinalizada char(1)," +
                                                                          " foreign key (idTipoRegistro) references TipoRegistro(id)," +
-                                                                         " foreign key(idEmpesa) references Empresa(id))";
+                                                                         " foreign key(idEmpresa) references Empresa(id))";
 
                 cmd.ExecuteNonQuery();
             }

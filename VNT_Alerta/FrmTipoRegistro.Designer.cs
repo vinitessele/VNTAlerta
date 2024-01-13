@@ -44,7 +44,7 @@
             // 
             // bntSalvar
             // 
-            bntSalvar.Click += BntSalvar_Click;
+            btnSalvar.Click += BntSalvar_Click;
             // 
             // btnNovo
             // 
@@ -60,7 +60,7 @@
             // 
             // bntEditar
             // 
-            bntEditar.Click += BntEditar_Click;
+            btnEditar.Click += BntEditar_Click;
             // 
             // btnPesquisar
             // 
@@ -114,7 +114,6 @@
 
         #endregion
 
-        private Label label1;
         private Label label2;
         private Label label3;
         private TextBox textID;

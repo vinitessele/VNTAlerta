@@ -49,7 +49,7 @@ namespace VNT_CentralDeNotificacao
                 d.Telefone = textTelefone.Text;
                 d.Celular = textCelular.Text;
                 if (textAbertura.Text != string.Empty)
-                    d.DataAbertura = DateTime.Parse(textAbertura.Text);
+                    d.DataAbertura =  DateTime.Parse(textAbertura.Text);
                 d.Observacao = textObs.Text;
 
                 if (textId.Text == string.Empty)
@@ -61,7 +61,7 @@ namespace VNT_CentralDeNotificacao
                     d.Id = int.Parse(textId.Text);
                     m.AlterEmpresa(d);
                 }
-                MessageBox.Show("Registro salvo com sucesso");
+                MessageBox.Show("Registro salvo com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch { throw; }
         }
@@ -78,7 +78,7 @@ namespace VNT_CentralDeNotificacao
 
                     m.DeleteEmpresa(id);
 
-                    MessageBox.Show("Registro Excluido com sucesso");
+                    MessageBox.Show("Registro apagado com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch { throw; }
@@ -94,7 +94,7 @@ namespace VNT_CentralDeNotificacao
         private void FrmCadEmpresa_Load(object sender, EventArgs e)
         {
             Model get = new();
-            List<DaoCidade> ListCidades = get.getAllCidades();
+            List<DaoCidade> ListCidades = get.GetAllCidades();
             comboBoxCidade.DataSource = null;
             comboBoxCidade.ValueMember = "id";
             comboBoxCidade.DisplayMember = "nome";

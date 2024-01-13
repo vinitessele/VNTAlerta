@@ -60,7 +60,7 @@ namespace VNT_CentralDeNotificacao
                     d.Id = int.Parse(textId.Text);
                     m.AlterCfgNotificacao(d);
                 }
-                MessageBox.Show("Registro salvo com sucesso");
+                MessageBox.Show("Registro salvo com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch { throw; }
         }
@@ -77,7 +77,7 @@ namespace VNT_CentralDeNotificacao
 
                     m.DeleteTipoRegistro(id);
 
-                    MessageBox.Show("Registro Excluido com sucesso");
+                    MessageBox.Show("Registro apagado com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch { throw; }
@@ -88,7 +88,7 @@ namespace VNT_CentralDeNotificacao
             try
             {
                 Model m = new();
-                DaoCfgNotificacao d = m.getCfgNotificao();
+                DaoCfgNotificacao d = m.GetCfgNotificao();
                 textId.Text = d.Id.ToString();
                 textPara.Text = d.emailTo;
                 textAssunto.Text = d.emailSubject;

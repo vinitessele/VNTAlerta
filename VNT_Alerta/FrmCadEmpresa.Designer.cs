@@ -96,7 +96,7 @@
             // 
             // bntSalvar
             // 
-            bntSalvar.Click += bntSalvar_Click;
+            btnSalvar.Click += bntSalvar_Click;
             // 
             // btnNovo
             // 
@@ -108,7 +108,7 @@
             // 
             // bntEditar
             // 
-            bntEditar.Click += bntEditar_Click;
+            btnEditar.Click += bntEditar_Click;
             // 
             // btnPesquisar
             // 

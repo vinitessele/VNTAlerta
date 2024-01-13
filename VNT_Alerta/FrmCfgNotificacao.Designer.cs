@@ -62,7 +62,7 @@
             // 
             // bntSalvar
             // 
-            bntSalvar.Click += bntSalvar_Click;
+            btnSalvar.Click += bntSalvar_Click;
             // 
             // btnNovo
             // 
@@ -74,7 +74,7 @@
             // 
             // bntEditar
             // 
-            bntEditar.Click += bntEditar_Click;
+            btnEditar.Click += bntEditar_Click;
             // 
             // btnPesquisar
             // 
@@ -212,7 +212,6 @@
         private Label label3;
         private Label label2;
         private Label label9;
-        private Label label6;
         private Label label5;
         private TextBox textDias;
         private CheckBox checkBoxNotificacaoWindows;

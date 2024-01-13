@@ -41,19 +41,19 @@
             textDataNotificacao = new MaskedTextBox();
             comboBoxTipoRegistro = new ComboBox();
             comboBoxEmpresa = new ComboBox();
-            checkBox1 = new CheckBox();
+            checkBoxStatus = new CheckBox();
             textId = new TextBox();
             textDescricao = new TextBox();
-            textBox2 = new TextBox();
+            textObs = new TextBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(textBox2);
+            groupBox1.Controls.Add(textObs);
             groupBox1.Controls.Add(textDescricao);
             groupBox1.Controls.Add(textId);
-            groupBox1.Controls.Add(checkBox1);
+            groupBox1.Controls.Add(checkBoxStatus);
             groupBox1.Controls.Add(comboBoxEmpresa);
             groupBox1.Controls.Add(comboBoxTipoRegistro);
             groupBox1.Controls.Add(textDataNotificacao);
@@ -68,13 +68,29 @@
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
             // 
+            // btnSalvar
+            // 
+            btnSalvar.Click += bntSalvar_Click;
+            // 
             // btnNovo
             // 
             btnNovo.Click += btnNovo_Click;
             // 
-            // bntEditar
+            // btnCancelar
             // 
-            bntEditar.Click += bntEditar_Click;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // btnExcluir
+            // 
+            btnExcluir.Click += btnExcluir_Click;
+            // 
+            // btnEditar
+            // 
+            btnEditar.Click += bntEditar_Click;
+            // 
+            // btnPesquisar
+            // 
+            btnPesquisar.Click += btnPesquisar_Click;
             // 
             // label1
             // 
@@ -154,7 +170,7 @@
             textDataIniProcesso.Mask = "00/00/0000";
             textDataIniProcesso.Name = "textDataIniProcesso";
             textDataIniProcesso.Size = new Size(100, 23);
-            textDataIniProcesso.TabIndex = 9;
+            textDataIniProcesso.TabIndex = 4;
             textDataIniProcesso.ValidatingType = typeof(DateTime);
             // 
             // textDataFimProcesso
@@ -163,7 +179,7 @@
             textDataFimProcesso.Mask = "00/00/0000";
             textDataFimProcesso.Name = "textDataFimProcesso";
             textDataFimProcesso.Size = new Size(100, 23);
-            textDataFimProcesso.TabIndex = 10;
+            textDataFimProcesso.TabIndex = 5;
             textDataFimProcesso.ValidatingType = typeof(DateTime);
             // 
             // textDataNotificacao
@@ -172,7 +188,7 @@
             textDataNotificacao.Mask = "00/00/0000";
             textDataNotificacao.Name = "textDataNotificacao";
             textDataNotificacao.Size = new Size(100, 23);
-            textDataNotificacao.TabIndex = 11;
+            textDataNotificacao.TabIndex = 6;
             textDataNotificacao.ValidatingType = typeof(DateTime);
             // 
             // comboBoxTipoRegistro
@@ -181,7 +197,7 @@
             comboBoxTipoRegistro.Location = new Point(96, 76);
             comboBoxTipoRegistro.Name = "comboBoxTipoRegistro";
             comboBoxTipoRegistro.Size = new Size(395, 23);
-            comboBoxTipoRegistro.TabIndex = 12;
+            comboBoxTipoRegistro.TabIndex = 2;
             // 
             // comboBoxEmpresa
             // 
@@ -189,17 +205,17 @@
             comboBoxEmpresa.Location = new Point(96, 104);
             comboBoxEmpresa.Name = "comboBoxEmpresa";
             comboBoxEmpresa.Size = new Size(395, 23);
-            comboBoxEmpresa.TabIndex = 13;
+            comboBoxEmpresa.TabIndex = 3;
             // 
-            // checkBox1
+            // checkBoxStatus
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(501, 185);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(138, 19);
-            checkBox1.TabIndex = 14;
-            checkBox1.Text = "Status da Notificação";
-            checkBox1.UseVisualStyleBackColor = true;
+            checkBoxStatus.AutoSize = true;
+            checkBoxStatus.Location = new Point(501, 185);
+            checkBoxStatus.Name = "checkBoxStatus";
+            checkBoxStatus.Size = new Size(138, 19);
+            checkBoxStatus.TabIndex = 8;
+            checkBoxStatus.Text = "Status da Notificação";
+            checkBoxStatus.UseVisualStyleBackColor = true;
             // 
             // textId
             // 
@@ -207,22 +223,23 @@
             textId.Location = new Point(46, 20);
             textId.Name = "textId";
             textId.Size = new Size(100, 23);
-            textId.TabIndex = 15;
+            textId.TabIndex = 0;
+            textId.TextChanged += textId_TextChanged;
             // 
             // textDescricao
             // 
             textDescricao.Location = new Point(96, 48);
             textDescricao.Name = "textDescricao";
             textDescricao.Size = new Size(613, 23);
-            textDescricao.TabIndex = 16;
+            textDescricao.TabIndex = 1;
             // 
-            // textBox2
+            // textObs
             // 
-            textBox2.Location = new Point(14, 185);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(477, 101);
-            textBox2.TabIndex = 17;
+            textObs.Location = new Point(14, 185);
+            textObs.Multiline = true;
+            textObs.Name = "textObs";
+            textObs.Size = new Size(477, 101);
+            textObs.TabIndex = 7;
             // 
             // FrmCadNotificacao
             // 
@@ -230,7 +247,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Name = "FrmCadNotificacao";
-            Text = "***Cadastro de Notificações";
+            Text = "***Cadastro de Notificações***";
+            Load += FrmCadNotificacao_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -245,10 +263,10 @@
         private Label label3;
         private Label label2;
         private Label label1;
-        private TextBox textBox2;
+        private TextBox textObs;
         private TextBox textDescricao;
         private TextBox textId;
-        private CheckBox checkBox1;
+        private CheckBox checkBoxStatus;
         private ComboBox comboBoxEmpresa;
         private ComboBox comboBoxTipoRegistro;
         private MaskedTextBox textDataNotificacao;

@@ -121,12 +121,12 @@
   <data name="btnPesquisar.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EQAACxEBf2RfkQAAAHhJREFUOE/NkVEOwCAIQz2aH9xrR9vRHCVlHwPRZD++hMSOFolr5yIiXevWGiyc
+        DgAACw4BQL7hQQAAAHhJREFUOE/NkVEOwCAIQz2aH9xrR9vRHCVlHwPRZD++hMSOFolr5yIiXevWGiyc
         O9s1MH4D2bcUGgdloOoZarhQlIFV3w3TNXcH/NrAHosygB48lDlqsN9G+cLwdLjhJhYG2cp+pi1HDeEG
         husgyMLbaLB8uJNp7QGjGkb9T1fnpAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="bntEditar.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnEditar.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         DAAACwwBP0AiyAAAAGJJREFUOE/lkksKwDAIBT1aFt6rR+vR0ow8Id2Ut2zpgOTHKCaJ75CZ54rJqC0f
@@ -150,7 +150,7 @@
         2s9TZDbhR4J8DcWfUDAwTts5zSY04dqZzht8QCkPvEt/nNFU7lEAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="bntSalvar.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnSalvar.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         DAAACwwBP0AiyAAAAHVJREFUOE/lT0EOgCAM42kc+BdP82m6YruADsPJmNikSVm7LqTvoJRSjfsCM1dG

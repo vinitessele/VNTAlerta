@@ -47,7 +47,7 @@ namespace VNT_CentralDeNotificacao
                     d.Id = int.Parse(textID.Text);
                     m.AlterTipoRegistro(d);
                 }
-                MessageBox.Show("Registro salvo com sucesso");
+                MessageBox.Show("Registro salvo com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch { throw; }
         }
@@ -82,7 +82,7 @@ namespace VNT_CentralDeNotificacao
 
                     m.DeleteTipoRegistro(id);
 
-                    MessageBox.Show("Registro Excluido com sucesso");
+                    MessageBox.Show("Registro apagado com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch { throw; }

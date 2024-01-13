@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
             panelMenu = new Panel();
             btnPesquisar = new Button();
-            bntEditar = new Button();
+            btnEditar = new Button();
             btnCancelar = new Button();
             btnExcluir = new Button();
-            bntSalvar = new Button();
+            btnSalvar = new Button();
             btnNovo = new Button();
             groupBox1 = new GroupBox();
             paneltop = new Panel();
@@ -45,10 +45,10 @@
             // 
             panelMenu.BackColor = SystemColors.ActiveBorder;
             panelMenu.Controls.Add(btnPesquisar);
-            panelMenu.Controls.Add(bntEditar);
+            panelMenu.Controls.Add(btnEditar);
             panelMenu.Controls.Add(btnCancelar);
             panelMenu.Controls.Add(btnExcluir);
-            panelMenu.Controls.Add(bntSalvar);
+            panelMenu.Controls.Add(btnSalvar);
             panelMenu.Controls.Add(btnNovo);
             panelMenu.Dock = DockStyle.Top;
             panelMenu.ForeColor = SystemColors.ControlDarkDark;
@@ -68,17 +68,17 @@
             btnPesquisar.TabIndex = 5;
             btnPesquisar.UseVisualStyleBackColor = false;
             // 
-            // bntEditar
+            // btnEditar
             // 
-            bntEditar.BackColor = SystemColors.AppWorkspace;
-            bntEditar.BackgroundImage = (Image)resources.GetObject("bntEditar.BackgroundImage");
-            bntEditar.BackgroundImageLayout = ImageLayout.Center;
-            bntEditar.Location = new Point(51, 12);
-            bntEditar.Name = "bntEditar";
-            bntEditar.Size = new Size(33, 35);
-            bntEditar.TabIndex = 1;
-            bntEditar.UseVisualStyleBackColor = false;
-            bntEditar.Click += BntEditar_Click;
+            btnEditar.BackColor = SystemColors.AppWorkspace;
+            btnEditar.BackgroundImage = (Image)resources.GetObject("btnEditar.BackgroundImage");
+            btnEditar.BackgroundImageLayout = ImageLayout.Center;
+            btnEditar.Location = new Point(51, 12);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(33, 35);
+            btnEditar.TabIndex = 1;
+            btnEditar.UseVisualStyleBackColor = false;
+            btnEditar.Click += BntEditar_Click;
             // 
             // btnCancelar
             // 
@@ -104,17 +104,18 @@
             btnExcluir.UseVisualStyleBackColor = false;
             btnExcluir.Click += BtnExcluir_Click;
             // 
-            // bntSalvar
+            // btnSalvar
             // 
-            bntSalvar.BackColor = SystemColors.AppWorkspace;
-            bntSalvar.BackgroundImage = (Image)resources.GetObject("bntSalvar.BackgroundImage");
-            bntSalvar.BackgroundImageLayout = ImageLayout.Center;
-            bntSalvar.Location = new Point(90, 12);
-            bntSalvar.Name = "bntSalvar";
-            bntSalvar.Size = new Size(33, 35);
-            bntSalvar.TabIndex = 2;
-            bntSalvar.UseVisualStyleBackColor = false;
-            bntSalvar.Click += BntSalvar_Click;
+            btnSalvar.BackColor = SystemColors.AppWorkspace;
+            btnSalvar.BackgroundImage = (Image)resources.GetObject("btnSalvar.BackgroundImage");
+            btnSalvar.BackgroundImageLayout = ImageLayout.Center;
+            btnSalvar.Enabled = false;
+            btnSalvar.Location = new Point(90, 12);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Size = new Size(33, 35);
+            btnSalvar.TabIndex = 2;
+            btnSalvar.UseVisualStyleBackColor = false;
+            btnSalvar.Click += BntSalvar_Click;
             // 
             // btnNovo
             // 
@@ -166,11 +167,11 @@
         private Panel panelMenu;
         private Panel paneltop;
         protected GroupBox groupBox1;
-        protected Button bntSalvar;
+        protected Button btnSalvar;
         protected Button btnNovo;
         protected Button btnCancelar;
         protected Button btnExcluir;
-        protected Button bntEditar;
+        protected Button btnEditar;
         protected Button btnPesquisar;
     }
 }

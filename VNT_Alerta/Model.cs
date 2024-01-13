@@ -114,7 +114,7 @@ namespace VNT_CentralDeNotificacao
                 throw;
             }
         }
-        public DaoCfgNotificacao getCfgNotificao()
+        public DaoCfgNotificacao GetCfgNotificao()
         {
             try
             {
@@ -140,7 +140,6 @@ namespace VNT_CentralDeNotificacao
                 throw;
             }
         }
-
         public void AlterEmpresa(DaoEmpresa dados)
         {
             try
@@ -192,12 +191,11 @@ namespace VNT_CentralDeNotificacao
                     {
                         Id = t.Id,
                         RazaoSocial = t.RazaoSocial,
-                        NomeFantasia = t.NomeFantasia                        
+                        NomeFantasia = t.NomeFantasia
                     };
             return q.ToList();
         }
-
-        public List<DaoCidade> getAllCidades()
+        public List<DaoCidade> GetAllCidades()
         {
             Context db = new Context();
 
@@ -214,11 +212,100 @@ namespace VNT_CentralDeNotificacao
 
             return q.ToList();
         }
-
         public DaoEmpresa GetEmpresaId(int id)
         {
             Context db = new Context();
             return db.empresa.Where(p => p.Id == id).FirstOrDefault();
+        }
+        internal void SetNotificacao(DaoNotificacao d)
+        {
+            try
+            {
+                Context db = new();
+                db.notificacao.Add(d);
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        internal void AlterNotificacao(DaoNotificacao dados)
+        {
+            try
+            {
+                Context db = new();
+                DaoNotificacao d = db.notificacao.FirstOrDefault(p => p.Id == dados.Id);
+
+                d.Descricao = dados.Descricao;
+                d.IdEmpresa = dados.IdEmpresa;
+                d.IdTipoRegistro = dados.IdTipoRegistro;
+                d.DataInicalProcesso = dados.DataInicalProcesso;
+                d.DataFinalProcesso = dados.DataFinalProcesso;
+                d.DataNotificacao = dados.DataNotificacao;
+                d.Observacao = dados.Observacao;
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        internal void DeleteNotificacao(int id)
+        {
+            try
+            {
+                Context db = new();
+                DaoNotificacao d = db.notificacao.FirstOrDefault(p => p.Id == id);
+                db.notificacao.Remove(d);
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        internal List<DaoNotificacao> GetListNotificacaoNome(string texto)
+        {
+            Context db = new Context();
+            var q = from t in db.notificacao
+                    where t.Descricao.Contains(texto)
+                    select new DaoNotificacao
+                    {
+                        Id = t.Id,
+                        Descricao = t.Descricao,
+                        IdEmpresa = t.IdEmpresa
+                    };
+            return q.ToList();
+        }
+        public List<DaoTipoRegistro> GetListTipoRegistroAll()
+        {
+            Context db = new Context();
+            var q = from t in db.tipoRegistro
+                    select new DaoTipoRegistro
+                    {
+                        Id = t.Id,
+                        Descricao = t.Descricao
+                    };
+            return q.ToList();
+        }
+
+        internal List<DaoEmpresa> GetListEmpresaAll()
+        {
+            Context db = new Context();
+            var q = from t in db.empresa
+                    select new DaoEmpresa
+                    {
+                        Id = t.Id,
+                        RazaoSocial = t.RazaoSocial
+                    };
+            return q.ToList();
+        }
+
+        internal DaoNotificacao GetNotificacaoId(int id)
+        {
+            Context db = new Context();
+            return  db.notificacao.FirstOrDefault(p => p.Id == id);
         }
     }
 }

@@ -25,15 +25,22 @@ namespace VNT_CentralDeNotificacao
         private void BntEditar_Click(object sender, EventArgs e)
         {
             HabilitaGroupBox();
+            btnNovo.Enabled = false;
+            btnEditar.Enabled = true;
+            btnSalvar.Enabled = true;
         }
 
         private void DesabilitaGroupBox()
         {
             groupBox1.Enabled = false;
+            btnNovo.Enabled = true;
+            btnSalvar.Enabled = false;
         }
         private void HabilitaGroupBox()
         {
             groupBox1.Enabled = true;
+            btnNovo.Enabled = false;
+            btnSalvar.Enabled = true;
         }
 
         private void BntSalvar_Click(object sender, EventArgs e)
