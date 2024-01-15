@@ -99,6 +99,7 @@ namespace VNT_CentralDeNotificacao
             comboBoxCidade.ValueMember = "id";
             comboBoxCidade.DisplayMember = "nome";
             comboBoxCidade.DataSource = ListCidades;
+            comboBoxCidade.Text = "[Selecione]";
         }
 
         private void textId_TextChanged(object sender, EventArgs e)

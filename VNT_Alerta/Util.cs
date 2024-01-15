@@ -34,7 +34,7 @@ namespace VNT_CentralDeNotificacao
                 // Criar objeto de mensagem
                 MailMessage message = new MailMessage(fromEmail, toEmail);
                 message.Subject = configuracao.emailSubject;
-                message.Body ="Data e hora:"+DateTime.Now + configuracao.emailBody + "</br>" + notificacao.NomeEmpresa + "</br> " + notificacao.Descricao + "</br> " + notificacao.DataNotificacao;
+                message.Body = configuracao.emailBody + "</br>" + notificacao.NomeEmpresa + "</br> " + notificacao.Descricao + "</br> " + notificacao.DataNotificacao;
 
                 // Configurar cliente SMTP
                 SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);

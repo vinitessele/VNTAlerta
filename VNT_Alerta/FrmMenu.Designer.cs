@@ -57,10 +57,12 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.BackColor = SystemColors.ScrollBar;
+            menuStrip1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             menuStrip1.Items.AddRange(new ToolStripItem[] { cadastroToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1284, 24);
+            menuStrip1.Size = new Size(1388, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -68,47 +70,48 @@
             // 
             cadastroToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { notificaçãoToolStripMenuItem, empresasToolStripMenuItem, tipoRegistroToolStripMenuItem, toolStripMenuItem2, toolStripSeparator1, licençaDeUsoToolStripMenuItem });
             cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
-            cadastroToolStripMenuItem.Size = new Size(71, 20);
+            cadastroToolStripMenuItem.Size = new Size(72, 20);
             cadastroToolStripMenuItem.Text = "Cadastros";
             // 
             // notificaçãoToolStripMenuItem
             // 
             notificaçãoToolStripMenuItem.Name = "notificaçãoToolStripMenuItem";
-            notificaçãoToolStripMenuItem.Size = new Size(194, 22);
+            notificaçãoToolStripMenuItem.Size = new Size(198, 22);
             notificaçãoToolStripMenuItem.Text = "Notificação";
             notificaçãoToolStripMenuItem.Click += notificaçãoToolStripMenuItem_Click;
             // 
             // empresasToolStripMenuItem
             // 
             empresasToolStripMenuItem.Name = "empresasToolStripMenuItem";
-            empresasToolStripMenuItem.Size = new Size(194, 22);
+            empresasToolStripMenuItem.Size = new Size(198, 22);
             empresasToolStripMenuItem.Text = "Empresas";
             empresasToolStripMenuItem.Click += empresasToolStripMenuItem_Click;
             // 
             // tipoRegistroToolStripMenuItem
             // 
             tipoRegistroToolStripMenuItem.Name = "tipoRegistroToolStripMenuItem";
-            tipoRegistroToolStripMenuItem.Size = new Size(194, 22);
+            tipoRegistroToolStripMenuItem.Size = new Size(198, 22);
             tipoRegistroToolStripMenuItem.Text = "Tipo Registro";
             tipoRegistroToolStripMenuItem.Click += tipoRegistroToolStripMenuItem_Click;
             // 
             // toolStripMenuItem2
             // 
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(194, 22);
+            toolStripMenuItem2.Size = new Size(198, 22);
             toolStripMenuItem2.Text = "Configuração de envio";
             toolStripMenuItem2.Click += toolStripMenuItem2_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(191, 6);
+            toolStripSeparator1.Size = new Size(195, 6);
             // 
             // licençaDeUsoToolStripMenuItem
             // 
             licençaDeUsoToolStripMenuItem.Name = "licençaDeUsoToolStripMenuItem";
-            licençaDeUsoToolStripMenuItem.Size = new Size(194, 22);
+            licençaDeUsoToolStripMenuItem.Size = new Size(198, 22);
             licençaDeUsoToolStripMenuItem.Text = "Licença de Uso";
+            licençaDeUsoToolStripMenuItem.Click += licençaDeUsoToolStripMenuItem_Click;
             // 
             // dataGridViewNotificações
             // 
@@ -117,11 +120,11 @@
             dataGridViewNotificações.Anchor = AnchorStyles.Bottom;
             dataGridViewNotificações.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewNotificações.Columns.AddRange(new DataGridViewColumn[] { id, DataNotificacao, descricao, NomeEmpresa, TipoRegistro });
-            dataGridViewNotificações.Location = new Point(12, 220);
+            dataGridViewNotificações.Location = new Point(101, 454);
             dataGridViewNotificações.Name = "dataGridViewNotificações";
             dataGridViewNotificações.ReadOnly = true;
             dataGridViewNotificações.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewNotificações.Size = new Size(1260, 218);
+            dataGridViewNotificações.Size = new Size(1200, 250);
             dataGridViewNotificações.TabIndex = 1;
             // 
             // id
@@ -208,8 +211,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.PapayaWhip;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1284, 450);
+            BackgroundImageLayout = ImageLayout.Zoom;
+            ClientSize = new Size(1388, 716);
             Controls.Add(dataGridViewNotificações);
             Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");

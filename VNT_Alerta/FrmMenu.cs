@@ -86,21 +86,27 @@ namespace VNT_CentralDeNotificacao
 
         private void MenuNotificacoes_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (e.ClickedItem.Name.ToString() == "toolStripMenuExit")
+            switch (e.ClickedItem.Name.ToString())
             {
-                this.Close();
+                case "toolStripMenuExit":
+                    Close();
+                    break;
+                case "toolStripMenuRestaurar":
+                    WindowState = FormWindowState.Maximized;
+                    break;
+                case "toolStripMenuEnviarNotificacao":
+                    {
+                        Model m = new();
+                        m.EnviaNotificacao();
+                        break;
+                    }
             }
-            else
-            if (e.ClickedItem.Name.ToString() == "toolStripMenuRestaurar")
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-            else
-                if (e.ClickedItem.Name.ToString() == "toolStripMenuEnviarNotificacao")
-            {
-                Model m = new();
-                m.EnviaNotificacao();
-            }
+        }
+
+        private void licençaDeUsoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAtivacao fr = new();
+            fr.Show();
         }
     }
 }
