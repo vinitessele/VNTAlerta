@@ -96,12 +96,14 @@ namespace VNT_CentralDeNotificacao
             comboBoxTipoRegistro.ValueMember = "id";
             comboBoxTipoRegistro.DisplayMember = "Descricao";
             comboBoxTipoRegistro.DataSource = List;
+            comboBoxTipoRegistro.Text = "[Selecione]";
 
             List<DaoEmpresa> List1 = get.GetListEmpresaAll();
             comboBoxEmpresa.DataSource = null;
             comboBoxEmpresa.ValueMember = "id";
             comboBoxEmpresa.DisplayMember = "RazaoSocial";
             comboBoxEmpresa.DataSource = List1;
+            comboBoxEmpresa.Text = "[Selecione]";
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

@@ -6,7 +6,17 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>LOGO.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="VNTServicoEnvioNotificacao.cs" />
+    <Compile Remove="VNTServicoEnvioNotificacao.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="LOGO.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />

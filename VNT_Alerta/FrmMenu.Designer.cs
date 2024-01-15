@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMenu));
             menuStrip1 = new MenuStrip();
             cadastroToolStripMenuItem = new ToolStripMenuItem();
             notificaçãoToolStripMenuItem = new ToolStripMenuItem();
@@ -35,11 +37,16 @@
             tipoRegistroToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
-            cidadeToolStripMenuItem = new ToolStripMenuItem();
-            estadoToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator2 = new ToolStripSeparator();
             licençaDeUsoToolStripMenuItem = new ToolStripMenuItem();
+            dataGridViewNotificações = new DataGridView();
+            id = new DataGridViewTextBoxColumn();
+            DataNotificacao = new DataGridViewTextBoxColumn();
+            descricao = new DataGridViewTextBoxColumn();
+            NomeEmpresa = new DataGridViewTextBoxColumn();
+            TipoRegistro = new DataGridViewTextBoxColumn();
+            VNTCentralNotificacao = new NotifyIcon(components);
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNotificações).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -47,13 +54,13 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { cadastroToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(1284, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // cadastroToolStripMenuItem
             // 
-            cadastroToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { notificaçãoToolStripMenuItem, empresasToolStripMenuItem, tipoRegistroToolStripMenuItem, toolStripMenuItem2, toolStripSeparator1, cidadeToolStripMenuItem, estadoToolStripMenuItem, toolStripSeparator2, licençaDeUsoToolStripMenuItem });
+            cadastroToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { notificaçãoToolStripMenuItem, empresasToolStripMenuItem, tipoRegistroToolStripMenuItem, toolStripMenuItem2, toolStripSeparator1, licençaDeUsoToolStripMenuItem });
             cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
             cadastroToolStripMenuItem.Size = new Size(71, 20);
             cadastroToolStripMenuItem.Text = "Cadastros";
@@ -91,41 +98,91 @@
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(191, 6);
             // 
-            // cidadeToolStripMenuItem
-            // 
-            cidadeToolStripMenuItem.Name = "cidadeToolStripMenuItem";
-            cidadeToolStripMenuItem.Size = new Size(194, 22);
-            cidadeToolStripMenuItem.Text = "Cidade";
-            // 
-            // estadoToolStripMenuItem
-            // 
-            estadoToolStripMenuItem.Name = "estadoToolStripMenuItem";
-            estadoToolStripMenuItem.Size = new Size(194, 22);
-            estadoToolStripMenuItem.Text = "Estado";
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(191, 6);
-            // 
             // licençaDeUsoToolStripMenuItem
             // 
             licençaDeUsoToolStripMenuItem.Name = "licençaDeUsoToolStripMenuItem";
             licençaDeUsoToolStripMenuItem.Size = new Size(194, 22);
             licençaDeUsoToolStripMenuItem.Text = "Licença de Uso";
             // 
+            // dataGridViewNotificações
+            // 
+            dataGridViewNotificações.AllowUserToAddRows = false;
+            dataGridViewNotificações.AllowUserToDeleteRows = false;
+            dataGridViewNotificações.Anchor = AnchorStyles.Bottom;
+            dataGridViewNotificações.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewNotificações.Columns.AddRange(new DataGridViewColumn[] { id, DataNotificacao, descricao, NomeEmpresa, TipoRegistro });
+            dataGridViewNotificações.Location = new Point(12, 220);
+            dataGridViewNotificações.Name = "dataGridViewNotificações";
+            dataGridViewNotificações.ReadOnly = true;
+            dataGridViewNotificações.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewNotificações.Size = new Size(1260, 218);
+            dataGridViewNotificações.TabIndex = 1;
+            // 
+            // id
+            // 
+            id.DataPropertyName = "id";
+            id.HeaderText = "ID";
+            id.Name = "id";
+            id.ReadOnly = true;
+            // 
+            // DataNotificacao
+            // 
+            DataNotificacao.DataPropertyName = "DataNotificacao";
+            DataNotificacao.HeaderText = "Data da Notificação";
+            DataNotificacao.Name = "DataNotificacao";
+            DataNotificacao.ReadOnly = true;
+            DataNotificacao.Width = 150;
+            // 
+            // descricao
+            // 
+            descricao.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            descricao.DataPropertyName = "descricao";
+            descricao.FillWeight = 150F;
+            descricao.HeaderText = "Descrição";
+            descricao.Name = "descricao";
+            descricao.ReadOnly = true;
+            descricao.Width = 250;
+            // 
+            // NomeEmpresa
+            // 
+            NomeEmpresa.DataPropertyName = "NomeEmpresa";
+            NomeEmpresa.HeaderText = "Empresa";
+            NomeEmpresa.Name = "NomeEmpresa";
+            NomeEmpresa.ReadOnly = true;
+            NomeEmpresa.Width = 250;
+            // 
+            // TipoRegistro
+            // 
+            TipoRegistro.DataPropertyName = "TipoRegistro";
+            TipoRegistro.HeaderText = "Tipo Registro";
+            TipoRegistro.Name = "TipoRegistro";
+            TipoRegistro.ReadOnly = true;
+            TipoRegistro.Width = 250;
+            // 
+            // VNTCentralNotificacao
+            // 
+            VNTCentralNotificacao.Icon = (Icon)resources.GetObject("VNTCentralNotificacao.Icon");
+            VNTCentralNotificacao.Text = "VNT Central de Notificação";
+            VNTCentralNotificacao.Visible = true;
+            VNTCentralNotificacao.Click += VNTCentralNotificacao_Click;
+            // 
             // FrmMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1284, 450);
+            Controls.Add(dataGridViewNotificações);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "FrmMenu";
             Text = "*** Central de notificação VNT - Sistemas ***";
             WindowState = FormWindowState.Maximized;
+            Load += FrmMenu_Load;
+            Resize += FrmMenu_Resize;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNotificações).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -139,9 +196,13 @@
         private ToolStripMenuItem tipoRegistroToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripMenuItem cidadeToolStripMenuItem;
-        private ToolStripMenuItem estadoToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem licençaDeUsoToolStripMenuItem;
+        private DataGridView dataGridViewNotificações;
+        private DataGridViewTextBoxColumn id;
+        private DataGridViewTextBoxColumn DataNotificacao;
+        private DataGridViewTextBoxColumn descricao;
+        private DataGridViewTextBoxColumn NomeEmpresa;
+        private DataGridViewTextBoxColumn TipoRegistro;
+        private NotifyIcon VNTCentralNotificacao;
     }
 }

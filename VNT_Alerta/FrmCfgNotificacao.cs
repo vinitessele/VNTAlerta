@@ -89,15 +89,18 @@ namespace VNT_CentralDeNotificacao
             {
                 Model m = new();
                 DaoCfgNotificacao d = m.GetCfgNotificao();
-                textId.Text = d.Id.ToString();
-                textPara.Text = d.emailTo;
-                textAssunto.Text = d.emailSubject;
-                textMensagem.Text = d.emailBody;
-                textDias.Text = d.DiasNotificacao.ToString();
-                if (d.notificacaoWindows == "S")
-                    checkBoxNotificacaoWindows.Checked = true;
-                if (d.notificacaoEmail == "S")
-                    checkBoxNotificacaoEmail.Checked = true;
+                if (d != null)
+                {
+                    textId.Text = d.Id.ToString();
+                    textPara.Text = d.emailTo;
+                    textAssunto.Text = d.emailSubject;
+                    textMensagem.Text = d.emailBody;
+                    textDias.Text = d.DiasNotificacao.ToString();
+                    if (d.notificacaoWindows == "S")
+                        checkBoxNotificacaoWindows.Checked = true;
+                    if (d.notificacaoEmail == "S")
+                        checkBoxNotificacaoEmail.Checked = true;
+                }
             }
             catch { throw; }
         }

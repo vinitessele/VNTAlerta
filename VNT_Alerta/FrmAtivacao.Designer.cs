@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAtivacao));
             label1 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
@@ -190,6 +191,7 @@
             Controls.Add(textBox1);
             Controls.Add(label2);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAtivacao";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ativação do Software de Notificação";

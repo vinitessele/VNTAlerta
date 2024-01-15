@@ -39,13 +39,8 @@ namespace VNT_CentralDeNotificacao
             CriarTabelaSQlite();
             AdicionaEstados();
             AdicionaCidades();
-            VerificaLicenca();
 
             labelVersao.Text = "Versão: 24.1.0";
-
-            FrmMenu fr = new();
-            fr.Show();
-            this.Hide();
         }
         private static SQLiteConnection DbConnection(string dataBasePath)
         {
@@ -67,11 +62,11 @@ namespace VNT_CentralDeNotificacao
                 FiletextBox.Text = selectedFilePath;
             }
         }
-        private void VerificaLicenca()
+        public Boolean VerificaLicenca()
         {
             string pathLicenca = Environment.CurrentDirectory + "\\Licença\\";
             string arquivoLicenca = pathLicenca + "\\reg.vnt";
-
+            bool ativo = false;
             try
             {
                 Crypt crypt = new();
@@ -200,8 +195,10 @@ namespace VNT_CentralDeNotificacao
             catch
             {
                 MessageBox.Show("Falha ao verificar Licença de uso do Software", "VNT - Sistemas");
+                return ativo = false;
                 throw;
             }
+            return ativo = true;
         }
         private void AddDadosEmpresaNova()
         {

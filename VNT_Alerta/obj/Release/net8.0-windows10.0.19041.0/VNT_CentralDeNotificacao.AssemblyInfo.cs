@@ -12,9 +12,9 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("VNT_CentralDeNotificacao")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+50d0e51108c50d86888e85cb2c70e91ab113b8ca")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("VNT_CentralDeNotificacao")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VNT_CentralDeNotificacao")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

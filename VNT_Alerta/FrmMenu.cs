@@ -15,6 +15,12 @@ namespace VNT_CentralDeNotificacao
         public FrmMenu()
         {
             InitializeComponent();
+            FormAtivacao formAtivacao = new ();
+            if (!formAtivacao.VerificaLicenca())
+            {
+                FormAtivacao fr = new();
+                fr.ShowDialog();               
+            }
         }
 
         private void notificaçãoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -39,6 +45,36 @@ namespace VNT_CentralDeNotificacao
         {
             FrmCfgNotificacao fr = new();
             fr.Show();
+        }
+
+        private void FrmMenu_Load(object sender, EventArgs e)
+        {
+            Model get = new();
+            List<DaoNotificacao> n = new();
+            n = get.GetNotificacaoAll();
+            CarregarGrid(n);
+        }
+        private void CarregarGrid(List<DaoNotificacao> d)
+        {
+            dataGridViewNotificações.DataSource = null;
+            dataGridViewNotificações.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewNotificações.MultiSelect = false;
+            dataGridViewNotificações.AutoGenerateColumns = false;
+            dataGridViewNotificações.DataSource = d;
+            dataGridViewNotificações.Refresh();
+        }
+
+        private void FrmMenu_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == this.WindowState)
+            {
+                this.Hide();
+            }
+        }
+
+        private void VNTCentralNotificacao_Click(object sender, EventArgs e)
+        {
+            new FrmMenu().Show();
         }
     }
 }

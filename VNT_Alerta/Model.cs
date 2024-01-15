@@ -307,5 +307,23 @@ namespace VNT_CentralDeNotificacao
             Context db = new Context();
             return  db.notificacao.FirstOrDefault(p => p.Id == id);
         }
+
+        internal List<DaoNotificacao> GetNotificacaoAll()
+        {
+            Context db = new Context();
+            var q = from n in db.notificacao
+                    join e in db.empresa 
+                    on n.IdEmpresa equals e.Id
+                    join t in db.tipoRegistro
+                    on n.IdTipoRegistro equals t.Id
+                    select new DaoNotificacao
+                    {
+                        Id = t.Id,
+                        NomeEmpresa = e.RazaoSocial,
+                        TipoRegistro = t.Descricao
+                    };
+            return q.ToList();
+
+        }
     }
 }

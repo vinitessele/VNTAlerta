@@ -6,7 +6,7 @@ namespace VNT_CentralDeNotificacao
 {
     public class Util
     {
-        private void NotificacaoWindow()
+        public void NotificacaoWindow()
         {
             new ToastContentBuilder()
          .AddArgument("conversationId", 9813)
@@ -17,7 +17,7 @@ namespace VNT_CentralDeNotificacao
              toast.ExpirationTime = DateTime.Now.AddDays(1);
          });
         }
-        private void EnviaEmail()
+        public void EnviaEmail()
         {
             // Configurações do servidor SMTP
             string smtpServer = "smtp.gmail.com";

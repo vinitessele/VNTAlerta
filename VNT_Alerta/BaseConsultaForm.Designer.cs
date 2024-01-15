@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseConsultaForm));
             groupBox1 = new GroupBox();
             textBoxPesquisa = new TextBox();
             groupBox2 = new GroupBox();
@@ -84,6 +85,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "BaseConsultaForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BaseConsultaForm";

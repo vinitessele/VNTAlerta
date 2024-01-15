@@ -155,6 +155,7 @@
             Controls.Add(paneltop);
             Controls.Add(panelMenu);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "BaseForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BaseForm";
