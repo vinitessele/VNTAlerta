@@ -38,12 +38,15 @@ namespace VNT_CentralDeNotificacao
                 d.Descricao = textDescricao.Text;
                 d.IdEmpresa = Convert.ToInt32(comboBoxEmpresa.SelectedValue);
                 d.IdTipoRegistro = Convert.ToInt32(comboBoxTipoRegistro.SelectedValue);
-                if (textDataIniProcesso.Text != string.Empty)
+                if (textDataIniProcesso.Text.Replace("/", "").Trim() != string.Empty)
                     d.DataInicalProcesso = DateTime.Parse(textDataIniProcesso.Text);
-                if (textDataFimProcesso.Text != string.Empty)
+                if (textDataFimProcesso.Text.Replace("/", "").Trim() != string.Empty)
                     d.DataFinalProcesso = DateTime.Parse(textDataFimProcesso.Text);
-                if (textDataNotificacao.Text != string.Empty)
+                if (textDataNotificacao.Text.Replace("/", "").Trim() != string.Empty)
                     d.DataNotificacao = DateTime.Parse(textDataNotificacao.Text);
+                else
+                    throw new Exception("Erro ao salvar registro");
+
                 d.Observacao = textObs.Text;
 
                 if (checkBoxStatus.Checked == true)

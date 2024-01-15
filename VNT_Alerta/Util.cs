@@ -6,18 +6,18 @@ namespace VNT_CentralDeNotificacao
 {
     public class Util
     {
-        public void NotificacaoWindow()
+        public static void NotificacaoWindow(DtoNotificacao notificacao)
         {
             new ToastContentBuilder()
          .AddArgument("conversationId", 9813)
-         .AddText("teste")
-         .AddText("teste")
+         .AddText(notificacao.NomeEmpresa)
+         .AddText(notificacao.Descricao)
          .Show(toast =>
          {
              toast.ExpirationTime = DateTime.Now.AddDays(1);
          });
         }
-        public void EnviaEmail()
+        public static void EnviaEmail(DtoNotificacao notificacao, DaoCfgNotificacao configuracao)
         {
             // Configurações do servidor SMTP
             string smtpServer = "smtp.gmail.com";
@@ -29,30 +29,32 @@ namespace VNT_CentralDeNotificacao
             string fromEmail = "vntnotificacao@gmail.com";
 
             // Endereço de email do destinatário
-            string toEmail = "vinicius_tessele@hotmail.com";
+            string[] ToEmails = configuracao.emailTo.Split(';');
+            foreach(var toEmail in ToEmails){
+                // Criar objeto de mensagem
+                MailMessage message = new MailMessage(fromEmail, toEmail);
+                message.Subject = configuracao.emailSubject;
+                message.Body ="Data e hora:"+DateTime.Now + configuracao.emailBody + "</br>" + notificacao.NomeEmpresa + "</br> " + notificacao.Descricao + "</br> " + notificacao.DataNotificacao;
 
-            // Criar objeto de mensagem
-            MailMessage message = new MailMessage(fromEmail, toEmail);
-            message.Subject = "Assunto do email";
-            message.Body = "Conteúdo do email";
+                // Configurar cliente SMTP
+                SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
+                smtp.UseDefaultCredentials = false;
+                smtp.EnableSsl = true; // Use SSL para conexão segura
+                smtp.Credentials = new System.Net.NetworkCredential(smtpUsername, smtpPassword);
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.EnableSsl = true;
+                try
+                {
+                    // Enviar email
+                    smtp.Send(message);
+                    Console.WriteLine("Email enviado com sucesso!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erro ao enviar o email: " + ex.Message);
+                }
+            }
 
-            // Configurar cliente SMTP
-            SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
-            smtp.UseDefaultCredentials = false;
-            smtp.EnableSsl = true; // Use SSL para conexão segura
-            smtp.Credentials = new System.Net.NetworkCredential(smtpUsername, smtpPassword);
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.EnableSsl = true;
-            try
-            {
-                // Enviar email
-                smtp.Send(message);
-                Console.WriteLine("Email enviado com sucesso!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Erro ao enviar o email: " + ex.Message);
-            }
         }
         public static string InsertEstado()
         {

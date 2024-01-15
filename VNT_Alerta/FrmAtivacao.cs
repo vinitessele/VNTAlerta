@@ -184,7 +184,7 @@ namespace VNT_CentralDeNotificacao
                             }
                             catch
                             {
-                                MessageBox.Show(msg, "VNT - Sistemas");
+                                MessageBox.Show(msg, "VNT - Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 throw;
                             }
                         }
@@ -194,7 +194,7 @@ namespace VNT_CentralDeNotificacao
             }
             catch
             {
-                MessageBox.Show("Falha ao verificar Licença de uso do Software", "VNT - Sistemas");
+                MessageBox.Show("Falha ao verificar Licença de uso do Software", "VNT - Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return ativo = false;
                 throw;
             }

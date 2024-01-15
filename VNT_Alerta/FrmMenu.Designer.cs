@@ -45,8 +45,14 @@
             NomeEmpresa = new DataGridViewTextBoxColumn();
             TipoRegistro = new DataGridViewTextBoxColumn();
             VNTCentralNotificacao = new NotifyIcon(components);
+            MenuNotificacoes = new ContextMenuStrip(components);
+            toolStripMenuRestaurar = new ToolStripMenuItem();
+            toolStripMenuExit = new ToolStripMenuItem();
+            toolStripMenuEnviarNotificacao = new ToolStripMenuItem();
+            timer1 = new System.Windows.Forms.Timer(components);
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewNotificações).BeginInit();
+            MenuNotificacoes.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -124,10 +130,11 @@
             id.HeaderText = "ID";
             id.Name = "id";
             id.ReadOnly = true;
+            id.Visible = false;
             // 
             // DataNotificacao
             // 
-            DataNotificacao.DataPropertyName = "DataNotificacao";
+            DataNotificacao.DataPropertyName = "dataNotificacao";
             DataNotificacao.HeaderText = "Data da Notificação";
             DataNotificacao.Name = "DataNotificacao";
             DataNotificacao.ReadOnly = true;
@@ -141,7 +148,7 @@
             descricao.HeaderText = "Descrição";
             descricao.Name = "descricao";
             descricao.ReadOnly = true;
-            descricao.Width = 250;
+            descricao.Width = 350;
             // 
             // NomeEmpresa
             // 
@@ -149,7 +156,7 @@
             NomeEmpresa.HeaderText = "Empresa";
             NomeEmpresa.Name = "NomeEmpresa";
             NomeEmpresa.ReadOnly = true;
-            NomeEmpresa.Width = 250;
+            NomeEmpresa.Width = 350;
             // 
             // TipoRegistro
             // 
@@ -157,19 +164,51 @@
             TipoRegistro.HeaderText = "Tipo Registro";
             TipoRegistro.Name = "TipoRegistro";
             TipoRegistro.ReadOnly = true;
-            TipoRegistro.Width = 250;
+            TipoRegistro.Width = 350;
             // 
             // VNTCentralNotificacao
             // 
+            VNTCentralNotificacao.ContextMenuStrip = MenuNotificacoes;
             VNTCentralNotificacao.Icon = (Icon)resources.GetObject("VNTCentralNotificacao.Icon");
             VNTCentralNotificacao.Text = "VNT Central de Notificação";
             VNTCentralNotificacao.Visible = true;
             VNTCentralNotificacao.Click += VNTCentralNotificacao_Click;
             // 
+            // MenuNotificacoes
+            // 
+            MenuNotificacoes.Items.AddRange(new ToolStripItem[] { toolStripMenuRestaurar, toolStripMenuExit, toolStripMenuEnviarNotificacao });
+            MenuNotificacoes.Name = "MenuNotificacoes";
+            MenuNotificacoes.Size = new Size(214, 70);
+            MenuNotificacoes.ItemClicked += MenuNotificacoes_ItemClicked;
+            // 
+            // toolStripMenuRestaurar
+            // 
+            toolStripMenuRestaurar.Name = "toolStripMenuRestaurar";
+            toolStripMenuRestaurar.Size = new Size(213, 22);
+            toolStripMenuRestaurar.Text = "Restaurar";
+            // 
+            // toolStripMenuExit
+            // 
+            toolStripMenuExit.Name = "toolStripMenuExit";
+            toolStripMenuExit.Size = new Size(213, 22);
+            toolStripMenuExit.Text = "Exit";
+            // 
+            // toolStripMenuEnviarNotificacao
+            // 
+            toolStripMenuEnviarNotificacao.Name = "toolStripMenuEnviarNotificacao";
+            toolStripMenuEnviarNotificacao.Size = new Size(213, 22);
+            toolStripMenuEnviarNotificacao.Text = "Enviar Notificação Manual";
+            // 
+            // timer1
+            // 
+            timer1.Interval = 3600000;
+            timer1.Tick += timer1_Tick;
+            // 
             // FrmMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1284, 450);
             Controls.Add(dataGridViewNotificações);
             Controls.Add(menuStrip1);
@@ -183,6 +222,7 @@
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewNotificações).EndInit();
+            MenuNotificacoes.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -198,11 +238,16 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem licençaDeUsoToolStripMenuItem;
         private DataGridView dataGridViewNotificações;
+        private NotifyIcon VNTCentralNotificacao;
+        private System.Windows.Forms.Timer timer1;
+        private ContextMenuStrip MenuNotificacoes;
+        private ToolStripMenuItem toolStripMenuRestaurar;
+        private ToolStripMenuItem toolStripMenuExit;
+        private ToolStripMenuItem toolStripMenuEnviarNotificacao;
         private DataGridViewTextBoxColumn id;
         private DataGridViewTextBoxColumn DataNotificacao;
         private DataGridViewTextBoxColumn descricao;
         private DataGridViewTextBoxColumn NomeEmpresa;
         private DataGridViewTextBoxColumn TipoRegistro;
-        private NotifyIcon VNTCentralNotificacao;
     }
 }

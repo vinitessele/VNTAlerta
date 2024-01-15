@@ -305,25 +305,62 @@ namespace VNT_CentralDeNotificacao
         internal DaoNotificacao GetNotificacaoId(int id)
         {
             Context db = new Context();
-            return  db.notificacao.FirstOrDefault(p => p.Id == id);
+            return db.notificacao.FirstOrDefault(p => p.Id == id);
         }
 
-        internal List<DaoNotificacao> GetNotificacaoAll()
+        internal List<DtoNotificacao> GetNotificacaoAll()
         {
             Context db = new Context();
             var q = from n in db.notificacao
-                    join e in db.empresa 
+                    join e in db.empresa
                     on n.IdEmpresa equals e.Id
                     join t in db.tipoRegistro
                     on n.IdTipoRegistro equals t.Id
-                    select new DaoNotificacao
+                    select new DtoNotificacao
                     {
                         Id = t.Id,
                         NomeEmpresa = e.RazaoSocial,
-                        TipoRegistro = t.Descricao
+                        TipoRegistro = t.Descricao,
+                        Descricao = n.Descricao,
+                        DataNotificacao = n.DataNotificacao
                     };
             return q.ToList();
+        }
+        internal void EnviaNotificacao()
+        {
+            DateTime data = DateTime.Now.AddDays(30);
+            Context db = new Context();
 
+            DaoCfgNotificacao cfgNotificacao = db.cfgNotificacao.FirstOrDefault();
+
+            var qNotificacao = from n in db.notificacao
+                               join e in db.empresa
+                               on n.IdEmpresa equals e.Id
+                               join t in db.tipoRegistro
+                               on n.IdTipoRegistro equals t.Id
+                               where n.notificacaoFinalizada == null
+                               && n.DataNotificacao <= data
+                               select new DtoNotificacao
+                               {
+                                   Id = t.Id,
+                                   NomeEmpresa = e.RazaoSocial,
+                                   TipoRegistro = t.Descricao,
+                                   Descricao = n.Descricao,
+                                   DataFinalProcesso = n.DataFinalProcesso,
+                                   Observacao = n.Observacao
+                               };
+
+            foreach (var list in qNotificacao)
+            {
+                if (cfgNotificacao.notificacaoWindows == "S")
+                {
+                    Util.NotificacaoWindow(list);
+                }
+                if (cfgNotificacao.notificacaoEmail == "S")
+                {
+                    Util.EnviaEmail(list, cfgNotificacao);
+                }
+            }
         }
     }
 }

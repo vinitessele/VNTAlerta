@@ -15,12 +15,14 @@ namespace VNT_CentralDeNotificacao
         public FrmMenu()
         {
             InitializeComponent();
-            FormAtivacao formAtivacao = new ();
+
+            FormAtivacao formAtivacao = new();
             if (!formAtivacao.VerificaLicenca())
             {
                 FormAtivacao fr = new();
-                fr.ShowDialog();               
+                fr.ShowDialog();
             }
+            timer1.Start();
         }
 
         private void notificaçãoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,11 +52,11 @@ namespace VNT_CentralDeNotificacao
         private void FrmMenu_Load(object sender, EventArgs e)
         {
             Model get = new();
-            List<DaoNotificacao> n = new();
+            List<DtoNotificacao> n = new();
             n = get.GetNotificacaoAll();
             CarregarGrid(n);
         }
-        private void CarregarGrid(List<DaoNotificacao> d)
+        private void CarregarGrid(List<DtoNotificacao> d)
         {
             dataGridViewNotificações.DataSource = null;
             dataGridViewNotificações.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -74,7 +76,31 @@ namespace VNT_CentralDeNotificacao
 
         private void VNTCentralNotificacao_Click(object sender, EventArgs e)
         {
-            new FrmMenu().Show();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Model m = new();
+            m.EnviaNotificacao();
+        }
+
+        private void MenuNotificacoes_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem.Name.ToString() == "toolStripMenuExit")
+            {
+                this.Close();
+            }
+            else
+            if (e.ClickedItem.Name.ToString() == "toolStripMenuRestaurar")
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+                if (e.ClickedItem.Name.ToString() == "toolStripMenuEnviarNotificacao")
+            {
+                Model m = new();
+                m.EnviaNotificacao();
+            }
         }
     }
 }
