@@ -21,7 +21,9 @@ namespace VNT_CentralDeNotificacao
             {
                 FormAtivacao fr = new();
                 fr.ShowDialog();
+                Close();
             }
+
             timer1.Start();
         }
 

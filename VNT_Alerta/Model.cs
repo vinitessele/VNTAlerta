@@ -127,7 +127,7 @@ namespace VNT_CentralDeNotificacao
                 throw;
             }
         }
-        public void setEmpresa(DaoEmpresa dados)
+        public void SetEmpresa(DaoEmpresa dados)
         {
             try
             {
@@ -152,10 +152,8 @@ namespace VNT_CentralDeNotificacao
                 d.Cnpj = dados.Cnpj;
                 d.Endereco = dados.Endereco;
                 d.Atividade = dados.Atividade;
-                d.bairro = dados.bairro;
-                d.cep = dados.cep;
-                d.Socios = dados.Socios;
-                d.PercentualSocios = dados.PercentualSocios;
+                d.Bairro = dados.Bairro;
+                d.Cep = dados.Cep;
                 d.Telefone = dados.Telefone;
                 d.Celular = dados.Celular;
                 d.DataAbertura = dados.DataAbertura;
@@ -360,6 +358,41 @@ namespace VNT_CentralDeNotificacao
                 {
                     Util.EnviaEmail(list, cfgNotificacao);
                 }
+            }
+        }
+
+        internal List<DaoSocios> GetSociosEmpresa(int id)
+        {
+            Context db = new Context();
+            return db.socios.Where(p=>p.IdEmpresa == id).ToList();
+        }
+
+        internal void SetSocios(DaoSocios d)
+        {
+            try
+            {
+                Context db = new();
+                db.socios.Add(d);
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        internal void DeleteSocios(int id)
+        {
+            try
+            {
+                Context db = new();
+                DaoSocios d = db.socios.FirstOrDefault(p => p.Id == id);
+                db.socios.Remove(d);
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
             }
         }
     }

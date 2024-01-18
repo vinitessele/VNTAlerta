@@ -58,11 +58,23 @@
             textCelular = new MaskedTextBox();
             textTelefone = new MaskedTextBox();
             textAbertura = new MaskedTextBox();
+            groupBox2 = new GroupBox();
+            btnAddSocios = new Button();
+            textPercential = new TextBox();
+            textNomeSocio = new TextBox();
+            dataGridViewSocios = new DataGridView();
+            Nome = new DataGridViewTextBoxColumn();
+            PercentualSocios = new DataGridViewTextBoxColumn();
+            Excluir = new DataGridViewButtonColumn();
+            id = new DataGridViewTextBoxColumn();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSocios).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(textAbertura);
             groupBox1.Controls.Add(textTelefone);
             groupBox1.Controls.Add(textCelular);
@@ -93,8 +105,9 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
+            groupBox1.Size = new Size(794, 639);
             // 
-            // bntSalvar
+            // btnSalvar
             // 
             btnSalvar.Click += bntSalvar_Click;
             // 
@@ -106,7 +119,7 @@
             // 
             btnExcluir.Click += btnExcluir_Click;
             // 
-            // bntEditar
+            // btnEditar
             // 
             btnEditar.Click += bntEditar_Click;
             // 
@@ -364,16 +377,106 @@
             textAbertura.TabIndex = 30;
             textAbertura.ValidatingType = typeof(DateTime);
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(btnAddSocios);
+            groupBox2.Controls.Add(textPercential);
+            groupBox2.Controls.Add(textNomeSocio);
+            groupBox2.Controls.Add(dataGridViewSocios);
+            groupBox2.Location = new Point(11, 374);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(759, 244);
+            groupBox2.TabIndex = 35;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Cadastro dos Sócios";
+            // 
+            // btnAddSocios
+            // 
+            btnAddSocios.Location = new Point(599, 32);
+            btnAddSocios.Name = "btnAddSocios";
+            btnAddSocios.Size = new Size(119, 23);
+            btnAddSocios.TabIndex = 36;
+            btnAddSocios.Text = "Adicionar Sócios";
+            btnAddSocios.UseVisualStyleBackColor = true;
+            btnAddSocios.Click += btnAddSocios_Click;
+            // 
+            // textPercential
+            // 
+            textPercential.Location = new Point(453, 33);
+            textPercential.Name = "textPercential";
+            textPercential.PlaceholderText = "%";
+            textPercential.Size = new Size(140, 23);
+            textPercential.TabIndex = 35;
+            // 
+            // textNomeSocio
+            // 
+            textNomeSocio.Location = new Point(16, 33);
+            textNomeSocio.Name = "textNomeSocio";
+            textNomeSocio.PlaceholderText = "Nome";
+            textNomeSocio.Size = new Size(426, 23);
+            textNomeSocio.TabIndex = 34;
+            // 
+            // dataGridViewSocios
+            // 
+            dataGridViewSocios.AllowUserToAddRows = false;
+            dataGridViewSocios.AllowUserToDeleteRows = false;
+            dataGridViewSocios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewSocios.Columns.AddRange(new DataGridViewColumn[] { Nome, PercentualSocios, Excluir, id });
+            dataGridViewSocios.Location = new Point(16, 72);
+            dataGridViewSocios.Name = "dataGridViewSocios";
+            dataGridViewSocios.ReadOnly = true;
+            dataGridViewSocios.Size = new Size(737, 140);
+            dataGridViewSocios.TabIndex = 33;
+            dataGridViewSocios.CellClick += dataGridViewSocios_CellClick;
+            // 
+            // Nome
+            // 
+            Nome.DataPropertyName = "nome";
+            Nome.HeaderText = "Nome";
+            Nome.Name = "Nome";
+            Nome.ReadOnly = true;
+            Nome.Width = 400;
+            // 
+            // PercentualSocios
+            // 
+            PercentualSocios.DataPropertyName = "percentualSocios";
+            PercentualSocios.HeaderText = "Percentual";
+            PercentualSocios.Name = "PercentualSocios";
+            PercentualSocios.ReadOnly = true;
+            PercentualSocios.Width = 150;
+            // 
+            // Excluir
+            // 
+            Excluir.FlatStyle = FlatStyle.Flat;
+            Excluir.HeaderText = "Excluir";
+            Excluir.Name = "Excluir";
+            Excluir.ReadOnly = true;
+            Excluir.Text = "Excluir";
+            Excluir.ToolTipText = "Excluir";
+            Excluir.UseColumnTextForButtonValue = true;
+            Excluir.Width = 50;
+            // 
+            // id
+            // 
+            id.DataPropertyName = "id";
+            id.HeaderText = "id";
+            id.Name = "id";
+            id.ReadOnly = true;
+            id.Visible = false;
+            // 
             // FrmCadEmpresa
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(823, 744);
             Name = "FrmCadEmpresa";
             Text = "***Cadastro de Empresas***";
             Load += FrmCadEmpresa_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSocios).EndInit();
             ResumeLayout(false);
         }
 
@@ -409,5 +512,14 @@
         private MaskedTextBox textCelular;
         private MaskedTextBox textTelefone;
         private MaskedTextBox textAbertura;
+        private Button btnAddSocios;
+        private GroupBox groupBox2;
+        private DataGridView dataGridViewSocios;
+        private TextBox textPercential;
+        private TextBox textNomeSocio;
+        private DataGridViewTextBoxColumn Nome;
+        private DataGridViewTextBoxColumn PercentualSocios;
+        private DataGridViewButtonColumn Excluir;
+        private DataGridViewTextBoxColumn id;
     }
 }

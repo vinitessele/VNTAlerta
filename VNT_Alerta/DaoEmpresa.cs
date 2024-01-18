@@ -17,13 +17,11 @@ namespace VNT_CentralDeNotificacao
         public string? Cnpj { get; set; }
         public string? Atividade { get; set; }
         public string? Endereco { get; set; }
-        public string? bairro { get; set; }
-        public string? cep { get; set; }
-        public int? idCidade { get; set; }
+        public string? Bairro { get; set; }
+        public string? Cep { get; set; }
+        public int? IdCidade { get; set; }
         public string? Telefone { get; set; }
         public string? Celular { get; set; }
-        public string? Socios { get; set; }
-        public string? PercentualSocios { get; set; }
         public DateTime? DataAbertura { get; set; }
         public string? Observacao { get; set; }
 

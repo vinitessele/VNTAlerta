@@ -120,11 +120,11 @@
             dataGridViewNotificações.Anchor = AnchorStyles.Bottom;
             dataGridViewNotificações.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewNotificações.Columns.AddRange(new DataGridViewColumn[] { id, DataNotificacao, descricao, NomeEmpresa, TipoRegistro });
-            dataGridViewNotificações.Location = new Point(101, 454);
+            dataGridViewNotificações.Location = new Point(12, 424);
             dataGridViewNotificações.Name = "dataGridViewNotificações";
             dataGridViewNotificações.ReadOnly = true;
             dataGridViewNotificações.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewNotificações.Size = new Size(1200, 250);
+            dataGridViewNotificações.Size = new Size(1400, 250);
             dataGridViewNotificações.TabIndex = 1;
             // 
             // id

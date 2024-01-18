@@ -18,19 +18,21 @@ namespace VNT_CentralDeNotificacao
         const string Teste = "T";
 
         private static SQLiteConnection sqliteConnection;
-        private string dbName = "bd.sqlite";
-        private string startupPath = Environment.CurrentDirectory + "\\DB\\";
-        private string dataBasePath = string.Empty;
+        private static string dbName = "bd.sqlite";
+        private static string startupPath = Environment.CurrentDirectory + "\\DB\\";
+        private static string dataBasePath = string.Empty;
 
-        private string chave = "Ajasklskeoessinmieosiusfoiweuwww";
-        private string empresa = "Empresa Teste";
-        private string cnpj = "12.123.123/0001-00";
-        private string chaveAcesso = "111-222-333-444-555-666-777-888-999";
-        private  string statusAtivacao = Teste;
+        private static string chave = "Ajasklskeoessinmieosiusfoiweuwww";
+        private static string empresa = "Empresa Teste";
+        private static string cnpj = "12.123.123/0001-00";
+        private static string chaveAcesso = "111-222-333-444-555-666-777-888-999";
+        private static string statusAtivacao = Teste;
         int idCidade = 4127700;
         DateTime dataInicioAtivacao = DateTime.Now;
         DateTime expira = DateTime.Now.AddDays(30);
-        private string identificacaoCliente = "Teste0000";
+        private static string identificacaoCliente = "Teste0000";
+        private static string pathLicenca = startupPath + "\\Licença\\";
+        private static string arquivoLicenca = startupPath + "\\Licença\\" + "\\reg.vnt";
 
         public FormAtivacao()
         {
@@ -39,9 +41,50 @@ namespace VNT_CentralDeNotificacao
             CriarTabelaSQlite();
             AdicionaEstados();
             AdicionaCidades();
-
+            CarregaDadosLicenca();
             labelVersao.Text = "Versão: 24.1.0";
         }
+
+        private void CarregaDadosLicenca()
+        {
+            VerificaOuCriaArquivo();
+            if (File.Exists(arquivoLicenca))
+            {
+                Crypt crypt = new();
+                string line;
+                StreamReader sr = new(arquivoLicenca);
+                line = sr.ReadLine();
+                while (line != null)
+                {
+                    try
+                    {
+                        string textoDescriptografado = crypt.Decrypt(line, chave);
+                        labelEmpresa.Text = "Empresa: " + textoDescriptografado;
+                        line = sr.ReadLine();
+                        textoDescriptografado = crypt.Decrypt(line, chave);
+                        labelCnpj.Text = "CNPJ: " + textoDescriptografado;
+                        line = sr.ReadLine();
+                        line = sr.ReadLine();
+                        line = sr.ReadLine();
+                        line = sr.ReadLine();
+                        line = sr.ReadLine();
+                        textoDescriptografado = crypt.Decrypt(line, chave);
+                        labelExpira.Text = "Expira em: " + textoDescriptografado;
+                        line = sr.ReadLine();
+                        textoDescriptografado = crypt.Decrypt(line, chave);
+                        labelIdentificacao.Text = "Identificação da Empresa: " + textoDescriptografado;
+                        line = sr.ReadLine();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Erro ao ler arquivo de licença", "VNT - Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        throw;
+                    }
+                }
+                sr.Close();
+            }
+        }
+
         private static SQLiteConnection DbConnection(string dataBasePath)
         {
             string caminho = "Data Source= " + dataBasePath + "; Version=3;";
@@ -64,15 +107,11 @@ namespace VNT_CentralDeNotificacao
         }
         public Boolean VerificaLicenca()
         {
-            string pathLicenca = Environment.CurrentDirectory + "\\Licença\\";
-            string arquivoLicenca = pathLicenca + "\\reg.vnt";
-            bool ativo = false;
             try
             {
                 Crypt crypt = new();
 
-                if (!Directory.Exists(pathLicenca))
-                    Directory.CreateDirectory(pathLicenca);
+                VerificaOuCriaArquivo();
 
                 if (!File.Exists(arquivoLicenca))
                 {
@@ -94,7 +133,7 @@ namespace VNT_CentralDeNotificacao
                 {
                     string msg = "Ops Algo de errado com sua licença entre em contato com a VNT - Sistemas";
                     using (var db = new Context())
-                    {                        
+                    {
                         DaoCfgEmpresa e = db.cfgEmpresa.FirstOrDefault();
 
                         string line;
@@ -195,11 +234,18 @@ namespace VNT_CentralDeNotificacao
             catch
             {
                 MessageBox.Show("Falha ao verificar Licença de uso do Software", "VNT - Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return ativo = false;
+                return false;
                 throw;
             }
-            return ativo = true;
+            return true;
         }
+
+        private void VerificaOuCriaArquivo()
+        {
+            if (!Directory.Exists(pathLicenca))
+                Directory.CreateDirectory(pathLicenca);
+        }
+
         private void AddDadosEmpresaNova()
         {
             using var db = new Context();
@@ -217,8 +263,6 @@ namespace VNT_CentralDeNotificacao
         }
         private void CriaBancoDados()
         {
-            try
-            {
                 try
                 {
                     if (!Directory.Exists(startupPath))
@@ -232,11 +276,6 @@ namespace VNT_CentralDeNotificacao
                 {
                     MessageBox.Show("Falha ao criar o banco de dados", "DB Creator");
                 }
-            }
-            catch
-            {
-                throw;
-            }
         }
         private void CriarTabelaSQlite()
         {
@@ -254,6 +293,7 @@ namespace VNT_CentralDeNotificacao
                                                                     " idEstado integer," +
                                                                     " foreign key (idEstado) references estado(id) )";
                 cmd.ExecuteNonQuery();
+
                 cmd.CommandText = "CREATE TABLE IF NOT EXISTS cfgEmpresa(id integer not null primary key autoincrement," +
                                                                         " nomeEmpresa  Varchar(200)," +
                                                                         " cnpj Varchar(16)," +
@@ -281,8 +321,6 @@ namespace VNT_CentralDeNotificacao
                                                                         " bairro varchar(100)," +
                                                                         " cep varchar(9)," +
                                                                         " idCidade integer not null," +
-                                                                        " socios Varchar(500)," +
-                                                                        " percentualSocios Varchar(500)," +
                                                                         " telefone Varchar(15)," +
                                                                         " celular Varchar(15)," +
                                                                         " dataAbertura DATETEXT," +
@@ -290,6 +328,14 @@ namespace VNT_CentralDeNotificacao
                                                                         " foreign key (idCidade) references cidade(id))";
 
                 cmd.ExecuteNonQuery();
+
+                cmd.CommandText = "CREATE TABLE IF NOT EXISTS socios(id integer not null primary key autoincrement," +
+                                    " nome  Varchar(200)," +
+                                    " percentualSocios numeric(10,2)," +
+                                    " idEmpresa integer, " +
+                                    " foreign key (idEmpresa) references empresa(id) )";
+                cmd.ExecuteNonQuery();
+
 
                 cmd.CommandText = "CREATE TABLE IF NOT EXISTS cfgNotificacao(id integer not null primary key autoincrement," +
                                                                             " emailFrom  VarChar(100)," +

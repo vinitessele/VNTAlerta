@@ -27,6 +27,7 @@ namespace VNT_CentralDeNotificacao
         public DbSet<DaoCfgNotificacao> cfgNotificacao { get; set; }
         public DbSet<DaoNotificacao> notificacao { get; set; }
         public DbSet<DaoTipoRegistro> tipoRegistro { get; set; }
+        public DbSet<DaoSocios> socios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -37,6 +38,7 @@ namespace VNT_CentralDeNotificacao
             builder.Entity<DaoCfgNotificacao>().HasKey(t => t.Id);
             builder.Entity<DaoNotificacao>().HasKey(t => t.Id);
             builder.Entity<DaoTipoRegistro>().HasKey(t => t.Id);
+            builder.Entity<DaoSocios>().HasKey(t => t.Id);
         }
 
     }
