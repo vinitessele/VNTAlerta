@@ -127,13 +127,14 @@ namespace VNT_CentralDeNotificacao
                 throw;
             }
         }
-        public void SetEmpresa(DaoEmpresa dados)
+        public int SetEmpresa(DaoEmpresa dados)
         {
             try
             {
                 Context db = new();
                 db.empresa.Add(dados);
                 db.SaveChanges();
+                return dados.Id;
             }
             catch
             {

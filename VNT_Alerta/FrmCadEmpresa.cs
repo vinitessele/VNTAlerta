@@ -14,6 +14,7 @@ namespace VNT_CentralDeNotificacao
 {
     public partial class FrmCadEmpresa : BaseForm
     {
+        int IDEmpresa;
         public FrmCadEmpresa()
         {
             InitializeComponent();
@@ -34,34 +35,40 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                Model m = new();
-                DaoEmpresa d = new();
-                d.RazaoSocial = textRazao.Text;
-                d.NomeFantasia = textFantasia.Text;
-                d.Cnpj = textCNPJ.Text;
-                d.Endereco = textEndereco.Text;
-                d.Atividade = textAtividade.Text;
-                d.Bairro = textBairro.Text;
-                d.Cep = textCep.Text;
-                d.IdCidade = Convert.ToInt32(comboBoxCidade.SelectedValue);
-                d.Telefone = textTelefone.Text;
-                d.Celular = textCelular.Text;
-                if (textAbertura.Text != string.Empty)
-                    d.DataAbertura = DateTime.Parse(textAbertura.Text);
-                d.Observacao = textObs.Text;
-
-                if (textId.Text == string.Empty)
-                {
-                    m.SetEmpresa(d);
-                }
-                else
-                {
-                    d.Id = int.Parse(textId.Text);
-                    m.AlterEmpresa(d);
-                }
+                AdicionarEmpresa();
                 MessageBox.Show("Registro salvo com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch { throw; }
+        }
+
+        private void AdicionarEmpresa()
+        {
+            Model m = new();
+            DaoEmpresa d = new();
+            d.RazaoSocial = textRazao.Text;
+            d.NomeFantasia = textFantasia.Text;
+            d.Cnpj = textCNPJ.Text;
+            d.Endereco = textEndereco.Text;
+            d.Atividade = textAtividade.Text;
+            d.Bairro = textBairro.Text;
+            d.Cep = textCep.Text;
+            d.IdCidade = Convert.ToInt32(comboBoxCidade.SelectedValue);
+            d.Telefone = textTelefone.Text;
+            d.Celular = textCelular.Text;
+            if (textAbertura.Text.Replace("/", "").Trim() != string.Empty)
+                d.DataAbertura = DateTime.Parse(textAbertura.Text);
+            d.Observacao = textObs.Text;
+
+            if (textId.Text == string.Empty)
+            {
+                IDEmpresa =  m.SetEmpresa(d);
+                textId.Text = IDEmpresa.ToString();
+            }
+            else
+            {
+                d.Id = int.Parse(textId.Text);
+                m.AlterEmpresa(d);
+            }
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
@@ -141,33 +148,11 @@ namespace VNT_CentralDeNotificacao
 
         private void btnAddSocios_Click(object sender, EventArgs e)
         {
+            AdicionarEmpresa();
+            
             Model m = new();
-            DaoEmpresa d = new();
-            d.RazaoSocial = textRazao.Text;
-            d.NomeFantasia = textFantasia.Text;
-            d.Cnpj = textCNPJ.Text;
-            d.Endereco = textEndereco.Text;
-            d.Atividade = textAtividade.Text;
-            d.Bairro = textBairro.Text;
-            d.Cep = textCep.Text;
-            d.IdCidade = Convert.ToInt32(comboBoxCidade.SelectedValue);
-            d.Telefone = textTelefone.Text;
-            d.Celular = textCelular.Text;
-            if (textAbertura.Text != string.Empty)
-                d.DataAbertura = DateTime.Parse(textAbertura.Text);
-            d.Observacao = textObs.Text;
-
-            if (textId.Text == string.Empty)
-            {
-                m.SetEmpresa(d);
-            }
-            else
-            {
-                d.Id = int.Parse(textId.Text);
-                m.AlterEmpresa(d);
-            }
-
             DaoSocios s = new();
+
             if (textId.Text != string.Empty)
             {
                 s.IdEmpresa = int.Parse(textId.Text);
