@@ -30,10 +30,10 @@ namespace VNT_CentralDeNotificacao
         int idCidade = 4127700;
         DateTime dataInicioAtivacao = DateTime.Now;
         DateTime expira = DateTime.Now.AddDays(30);
-        private static string identificacaoCliente = "Teste0000";
+        private static string identificacaoCliente = "Test0000";
         private static string pathLicenca = startupPath + "\\Licença\\";
         private static string arquivoLicenca = startupPath + "\\Licença\\" + "\\reg.vnt";
-
+        Model m = new();
         public FormAtivacao()
         {
             InitializeComponent();
@@ -50,39 +50,98 @@ namespace VNT_CentralDeNotificacao
             VerificaOuCriaArquivo();
             if (File.Exists(arquivoLicenca))
             {
-                Crypt crypt = new();
-                string line;
-                StreamReader sr = new(arquivoLicenca);
-                line = sr.ReadLine();
-                while (line != null)
-                {
-                    try
-                    {
-                        string textoDescriptografado = crypt.Decrypt(line, chave);
-                        labelEmpresa.Text = "Empresa: " + textoDescriptografado;
-                        line = sr.ReadLine();
-                        textoDescriptografado = crypt.Decrypt(line, chave);
-                        labelCnpj.Text = "CNPJ: " + textoDescriptografado;
-                        line = sr.ReadLine();
-                        line = sr.ReadLine();
-                        line = sr.ReadLine();
-                        line = sr.ReadLine();
-                        line = sr.ReadLine();
-                        textoDescriptografado = crypt.Decrypt(line, chave);
-                        labelExpira.Text = "Expira em: " + textoDescriptografado;
-                        line = sr.ReadLine();
-                        textoDescriptografado = crypt.Decrypt(line, chave);
-                        labelIdentificacao.Text = "Identificação da Empresa: " + textoDescriptografado;
-                        line = sr.ReadLine();
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Erro ao ler arquivo de licença", "VNT - Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        throw;
-                    }
-                }
-                sr.Close();
+                LerArquivoLicencaTela();
             }
+        }
+
+        private void LerArquivoLicencaTela()
+        {
+            string line;
+            StreamReader sr = new(arquivoLicenca);
+            line = sr.ReadLine();
+            while (line != null)
+            {
+                try
+                {
+                    Crypt crypt = new();
+                    string textoDescriptografado = crypt.Decrypt(line, chave);
+                    labelEmpresa.Text = "Empresa: " + textoDescriptografado;
+                    line = sr.ReadLine();
+                    textoDescriptografado = crypt.Decrypt(line, chave);
+                    labelCnpj.Text = "CNPJ: " + textoDescriptografado;
+                    line = sr.ReadLine();
+                    line = sr.ReadLine();
+                    line = sr.ReadLine();
+                    line = sr.ReadLine();
+                    line = sr.ReadLine();
+                    textoDescriptografado = crypt.Decrypt(line, chave);
+                    labelExpira.Text = "Expira em: " + textoDescriptografado;
+                    line = sr.ReadLine();
+                    textoDescriptografado = crypt.Decrypt(line, chave);
+                    labelIdentificacao.Text = "Identificação da Empresa: " + textoDescriptografado;
+                    line = sr.ReadLine();
+                }
+                catch
+                {
+                    MessageBox.Show("Erro ao ler arquivo de licença", "VNT - Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    throw;
+                }
+            }
+            sr.Close();
+        }
+
+        private DaoCfgEmpresa LerArquivoLicenca()
+        {
+            Crypt crypt = new();
+            string line;
+            string textoDescriptografado;
+            DaoCfgEmpresa empresa = new DaoCfgEmpresa();
+            StreamReader sr = new(arquivoLicenca);
+            line = sr.ReadLine();
+            while (line != null)
+            {
+                try
+                {
+                    textoDescriptografado = crypt.Decrypt(line, chave);
+                    empresa.NomeEmpresa =  textoDescriptografado;
+                    line = sr.ReadLine();
+
+                    textoDescriptografado = crypt.Decrypt(line, chave);
+                    empresa.Cnpj = textoDescriptografado;
+                    line = sr.ReadLine();
+
+                    textoDescriptografado = crypt.Decrypt(line, chave);
+                    empresa.chaveAcesso = textoDescriptografado;
+                    line = sr.ReadLine();
+
+                    textoDescriptografado = crypt.Decrypt(line, chave);
+                    empresa.statusAtivacao = textoDescriptografado;
+                    line = sr.ReadLine();
+
+                    textoDescriptografado = crypt.Decrypt(line, chave);
+                    empresa.idCidade =int.Parse(textoDescriptografado);
+                    line = sr.ReadLine();
+
+                    textoDescriptografado = crypt.Decrypt(line, chave);
+                    empresa.dataInicioAtivacao = DateTime.Parse(textoDescriptografado);
+                    line = sr.ReadLine();
+
+                    textoDescriptografado = crypt.Decrypt(line, chave);
+                    empresa.dataFimAtivacao = DateTime.Parse(textoDescriptografado);
+                    line = sr.ReadLine();
+
+                    textoDescriptografado = crypt.Decrypt(line, chave);
+                    empresa.identificacaoCliente = textoDescriptografado;
+                    line = sr.ReadLine();
+                }
+                catch
+                {
+                    MessageBox.Show("Erro ao ler arquivo de licença", "VNT - Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    throw;
+                }
+            }
+            sr.Close();
+            return empresa;
         }
 
         private static SQLiteConnection DbConnection(string dataBasePath)
@@ -103,31 +162,40 @@ namespace VNT_CentralDeNotificacao
             {
                 string selectedFilePath = openFileDialog.FileName;
                 FiletextBox.Text = selectedFilePath;
+
+                File.Delete(arquivoLicenca);
+                
+                FileInfo fi = new FileInfo(FiletextBox.Text);
+                
+                fi.MoveTo(arquivoLicenca);
+
+                DaoCfgEmpresa empresa = LerArquivoLicenca();
+
+                m.SetDadosEmpresa(empresa);
+
             }
         }
         public Boolean VerificaLicenca()
         {
             try
             {
-                Crypt crypt = new();
-
                 VerificaOuCriaArquivo();
 
                 if (!File.Exists(arquivoLicenca))
                 {
-                    StreamWriter arquivo;
-                    // Criptografar
-                    arquivo = File.CreateText(arquivoLicenca);
-                    arquivo.WriteLine(crypt.Encrypt(empresa, chave));
-                    arquivo.WriteLine(crypt.Encrypt(cnpj, chave));
-                    arquivo.WriteLine(crypt.Encrypt(chaveAcesso, chave));
-                    arquivo.WriteLine(crypt.Encrypt(statusAtivacao, chave));
-                    arquivo.WriteLine(crypt.Encrypt(idCidade.ToString(), chave));
-                    arquivo.WriteLine(crypt.Encrypt(dataInicioAtivacao.ToString(), chave));
-                    arquivo.WriteLine(crypt.Encrypt(expira.ToString(), chave));
-                    arquivo.WriteLine(crypt.Encrypt(identificacaoCliente.ToString(), chave));
-                    arquivo.Close();
-                    AddDadosEmpresaNova();
+                    //Cria Licença de Demo
+                    DaoCfgEmpresa e = new();
+                    e.NomeEmpresa = empresa;
+                    e.Cnpj = cnpj;
+                    e.chaveAcesso = chaveAcesso;
+                    e.statusAtivacao = statusAtivacao;
+                    e.idCidade = idCidade;
+                    e.dataInicioAtivacao = dataInicioAtivacao;
+                    e.dataFimAtivacao = expira;
+                    e.identificacaoCliente = identificacaoCliente;
+
+                    CriaArquivo(e);
+                    m.SetDadosEmpresa(e);
                 }
                 else
                 {
@@ -141,6 +209,7 @@ namespace VNT_CentralDeNotificacao
                         line = sr.ReadLine();
                         while (line != null)
                         {
+                            Crypt crypt = new();
                             try
                             {
                                 string textoDescriptografado = crypt.Decrypt(line, chave);
@@ -200,7 +269,7 @@ namespace VNT_CentralDeNotificacao
                                     throw new InvalidOperationException(msg);
                                 }
                                 textoDescriptografado = crypt.Decrypt(line, chave);
-                                if (textoDescriptografado == e.dataFimAtivacao.ToString())
+                                if (textoDescriptografado == e.dataFimAtivacao.ToString().Substring(0,10))
                                 {
                                     line = sr.ReadLine();
                                     labelExpira.Text = "Expira em: " + textoDescriptografado;
@@ -239,43 +308,28 @@ namespace VNT_CentralDeNotificacao
             }
             return true;
         }
-
         private void VerificaOuCriaArquivo()
         {
             if (!Directory.Exists(pathLicenca))
                 Directory.CreateDirectory(pathLicenca);
         }
 
-        private void AddDadosEmpresaNova()
-        {
-            using var db = new Context();
-            DaoCfgEmpresa e = new();
-            e.NomeEmpresa = empresa;
-            e.Cnpj = cnpj;
-            e.chaveAcesso = chaveAcesso;
-            e.statusAtivacao = statusAtivacao;
-            e.dataInicioAtivacao = dataInicioAtivacao;
-            e.dataFimAtivacao = expira;
-            e.idCidade = idCidade;
-            e.identificacaoCliente = identificacaoCliente;
-            db.cfgEmpresa.Add(e);
-            db.SaveChanges();
-        }
+
         private void CriaBancoDados()
         {
-                try
-                {
-                    if (!Directory.Exists(startupPath))
-                        Directory.CreateDirectory(startupPath);
+            try
+            {
+                if (!Directory.Exists(startupPath))
+                    Directory.CreateDirectory(startupPath);
 
-                    dataBasePath = startupPath + dbName;
-                    if (!File.Exists(dataBasePath))
-                        SQLiteConnection.CreateFile(dataBasePath);
-                }
-                catch
-                {
-                    MessageBox.Show("Falha ao criar o banco de dados", "DB Creator");
-                }
+                dataBasePath = startupPath + dbName;
+                if (!File.Exists(dataBasePath))
+                    SQLiteConnection.CreateFile(dataBasePath);
+            }
+            catch
+            {
+                MessageBox.Show("Falha ao criar o banco de dados", "DB Creator");
+            }
         }
         private void CriarTabelaSQlite()
         {
@@ -415,8 +469,58 @@ namespace VNT_CentralDeNotificacao
                     Console.WriteLine("Já existem dados: " + ex.Message);
                 }
             }
-
         }
 
+        private void btnAtivar_Click(object sender, EventArgs e)
+        {
+            string[] partes = textSerial.Text.Split('-');
+            string identificadorEmpresa;
+            string vencimento;
+            identificadorEmpresa = partes[0].Substring(0, 1);
+            identificadorEmpresa += partes[1].Substring(0, 1);
+            identificadorEmpresa += partes[2].Substring(0, 1);
+            identificadorEmpresa += partes[3].Substring(0, 1);
+            identificadorEmpresa += partes[4].Substring(0, 4);
+
+            vencimento = partes[0].Substring(3, 2) + "/";
+            vencimento += partes[1].Substring(3, 2) + "/";
+            vencimento += partes[2].Substring(3, 2);
+            vencimento += partes[3].Substring(3, 2);
+
+            m.AlteraRegistroEmpresa(identificadorEmpresa, vencimento, textSerial.Text);
+
+            AlteraVntReg(identificadorEmpresa, vencimento, textSerial.Text);
+        }
+
+        private void AlteraVntReg(string identificadorEmpresa, string vencimento, string serial)
+        {
+            Context db = new();
+            if (File.Exists(arquivoLicenca))
+            {               
+                File.Delete(arquivoLicenca);
+                DaoCfgEmpresa d = db.cfgEmpresa.FirstOrDefault();
+                
+                if (d != null)
+                {
+                    CriaArquivo(d);
+                }
+            }
+        }
+        private void CriaArquivo(DaoCfgEmpresa e)
+        {
+            Crypt crypt = new();
+            StreamWriter arquivo;
+            // Criptografar
+            arquivo = File.CreateText(arquivoLicenca);
+            arquivo.WriteLine(crypt.Encrypt(e.NomeEmpresa, chave));
+            arquivo.WriteLine(crypt.Encrypt(e.Cnpj, chave));
+            arquivo.WriteLine(crypt.Encrypt(e.chaveAcesso, chave));
+            arquivo.WriteLine(crypt.Encrypt(e.statusAtivacao, chave));
+            arquivo.WriteLine(crypt.Encrypt(e.idCidade.ToString(), chave));
+            arquivo.WriteLine(crypt.Encrypt(e.dataInicioAtivacao.ToString(), chave));
+            arquivo.WriteLine(crypt.Encrypt(e.dataFimAtivacao.ToString(), chave));
+            arquivo.WriteLine(crypt.Encrypt(e.identificacaoCliente, chave));
+            arquivo.Close();
+        }
     }
 }

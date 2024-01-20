@@ -8,14 +8,15 @@ namespace VNT_CentralDeNotificacao
 {
     public class Model
     {
-        public void SetTipoRegistro(DaoTipoRegistro dados)
+        Context db = new();
+        public int SetTipoRegistro(DaoTipoRegistro dados)
         {
             try
-            {
-                Context db = new();
+            {               
                 if (dados.Descricao != null)
                     db.tipoRegistro.Add(dados);
                 db.SaveChanges();
+                return dados.Id;
             }
             catch
             {
@@ -26,7 +27,6 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                Context db = new();
                 DaoTipoRegistro t = db.tipoRegistro.FirstOrDefault(p => p.Id == dados.Id);
                 t.Descricao = dados.Descricao;
                 db.SaveChanges();
@@ -40,7 +40,6 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                Context db = new();
                 DaoTipoRegistro t = db.tipoRegistro.FirstOrDefault(p => p.Id == id);
                 db.tipoRegistro.Remove(t);
                 db.SaveChanges();
@@ -52,7 +51,6 @@ namespace VNT_CentralDeNotificacao
         }
         public List<DaoTipoRegistro> GetListTipoRegistro(string texto)
         {
-            Context db = new Context();
             var q = from t in db.tipoRegistro
                     where t.Descricao.Contains(texto)
                     select new DaoTipoRegistro
@@ -64,17 +62,16 @@ namespace VNT_CentralDeNotificacao
         }
         public string GetTipoRegistroID(string id)
         {
-            Context db = new Context();
             string descricao = db.tipoRegistro.FirstOrDefault(p => p.Id == int.Parse(id)).Descricao;
             return descricao;
         }
-        public void SetCfgNotificacao(DaoCfgNotificacao dados)
+        public int SetCfgNotificacao(DaoCfgNotificacao dados)
         {
             try
             {
-                Context db = new();
                 db.cfgNotificacao.Add(dados);
                 db.SaveChanges();
+                return dados.Id;
             }
             catch
             {
@@ -85,7 +82,6 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                Context db = new();
                 DaoCfgNotificacao n = db.cfgNotificacao.FirstOrDefault(p => p.Id == dados.Id);
                 n.emailTo = dados.emailTo;
                 n.emailSubject = dados.emailSubject;
@@ -104,7 +100,6 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                Context db = new();
                 DaoCfgNotificacao t = db.cfgNotificacao.FirstOrDefault(p => p.Id == id);
                 db.cfgNotificacao.Remove(t);
                 db.SaveChanges();
@@ -118,7 +113,6 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                Context db = new();
                 DaoCfgNotificacao t = db.cfgNotificacao.FirstOrDefault();
                 return t;
             }
@@ -131,7 +125,6 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                Context db = new();
                 db.empresa.Add(dados);
                 db.SaveChanges();
                 return dados.Id;
@@ -145,7 +138,6 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                Context db = new();
                 DaoEmpresa d = db.empresa.FirstOrDefault(p => p.Id == dados.Id);
 
                 d.RazaoSocial = dados.RazaoSocial;
@@ -170,7 +162,6 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                Context db = new();
                 DaoEmpresa t = db.empresa.FirstOrDefault(p => p.Id == id);
                 db.empresa.Remove(t);
                 db.SaveChanges();
@@ -183,7 +174,6 @@ namespace VNT_CentralDeNotificacao
         }
         public List<DaoEmpresa> GetListEmpresaNome(string texto)
         {
-            Context db = new Context();
             var q = from t in db.empresa
                     where t.RazaoSocial.Contains(texto)
                     select new DaoEmpresa
@@ -196,8 +186,6 @@ namespace VNT_CentralDeNotificacao
         }
         public List<DaoCidade> GetAllCidades()
         {
-            Context db = new Context();
-
             var q = (from c in db.cidade
                      join e in db.estado
                      on c.IdEstado equals e.Id into estado
@@ -213,16 +201,15 @@ namespace VNT_CentralDeNotificacao
         }
         public DaoEmpresa GetEmpresaId(int id)
         {
-            Context db = new Context();
             return db.empresa.Where(p => p.Id == id).FirstOrDefault();
         }
-        internal void SetNotificacao(DaoNotificacao d)
+        internal int SetNotificacao(DaoNotificacao dados)
         {
             try
             {
-                Context db = new();
-                db.notificacao.Add(d);
+                db.notificacao.Add(dados);
                 db.SaveChanges();
+                return dados.Id;
             }
             catch
             {
@@ -233,7 +220,6 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                Context db = new();
                 DaoNotificacao d = db.notificacao.FirstOrDefault(p => p.Id == dados.Id);
 
                 d.Descricao = dados.Descricao;
@@ -254,7 +240,6 @@ namespace VNT_CentralDeNotificacao
         {
             try
             {
-                Context db = new();
                 DaoNotificacao d = db.notificacao.FirstOrDefault(p => p.Id == id);
                 db.notificacao.Remove(d);
                 db.SaveChanges();
@@ -266,7 +251,6 @@ namespace VNT_CentralDeNotificacao
         }
         internal List<DaoNotificacao> GetListNotificacaoNome(string texto)
         {
-            Context db = new Context();
             var q = from t in db.notificacao
                     where t.Descricao.Contains(texto)
                     select new DaoNotificacao
@@ -279,7 +263,6 @@ namespace VNT_CentralDeNotificacao
         }
         public List<DaoTipoRegistro> GetListTipoRegistroAll()
         {
-            Context db = new Context();
             var q = from t in db.tipoRegistro
                     select new DaoTipoRegistro
                     {
@@ -291,7 +274,6 @@ namespace VNT_CentralDeNotificacao
 
         internal List<DaoEmpresa> GetListEmpresaAll()
         {
-            Context db = new Context();
             var q = from t in db.empresa
                     select new DaoEmpresa
                     {
@@ -303,13 +285,11 @@ namespace VNT_CentralDeNotificacao
 
         internal DaoNotificacao GetNotificacaoId(int id)
         {
-            Context db = new Context();
             return db.notificacao.FirstOrDefault(p => p.Id == id);
         }
 
         internal List<DtoNotificacao> GetNotificacaoAll()
         {
-            Context db = new Context();
             var q = from n in db.notificacao
                     join e in db.empresa
                     on n.IdEmpresa equals e.Id
@@ -328,8 +308,6 @@ namespace VNT_CentralDeNotificacao
         internal void EnviaNotificacao()
         {
             DateTime data = DateTime.Now.AddDays(30);
-            Context db = new Context();
-
             DaoCfgNotificacao cfgNotificacao = db.cfgNotificacao.FirstOrDefault();
 
             var qNotificacao = from n in db.notificacao
@@ -364,29 +342,26 @@ namespace VNT_CentralDeNotificacao
 
         internal List<DaoSocios> GetSociosEmpresa(int id)
         {
-            Context db = new Context();
             return db.socios.Where(p=>p.IdEmpresa == id).ToList();
         }
 
-        internal void SetSocios(DaoSocios d)
+        internal int SetSocios(DaoSocios dados)
         {
             try
             {
-                Context db = new();
-                db.socios.Add(d);
+                db.socios.Add(dados);
                 db.SaveChanges();
+                return dados.Id;
             }
             catch
             {
                 throw;
             }
         }
-
         internal void DeleteSocios(int id)
         {
             try
             {
-                Context db = new();
                 DaoSocios d = db.socios.FirstOrDefault(p => p.Id == id);
                 db.socios.Remove(d);
                 db.SaveChanges();
@@ -395,6 +370,53 @@ namespace VNT_CentralDeNotificacao
             {
                 throw;
             }
+        }
+
+        internal void AlteraRegistroEmpresa(string identificadorEmpresa, string vencimento, string serial)
+        {
+            try
+            {
+                DaoCfgEmpresa d = db.cfgEmpresa.FirstOrDefault();
+                if (d.identificacaoCliente != null)
+                {
+                    if (d.identificacaoCliente == "Test0000")
+                    {
+                        d.identificacaoCliente = identificadorEmpresa;
+                    }
+                    else if(d.identificacaoCliente != identificadorEmpresa)
+                    {
+                        throw new Exception("Erro na identificação da empresa");
+                    }
+                    d.dataFimAtivacao = DateTime.Parse(vencimento);
+                    d.statusAtivacao = "A";
+                    d.chaveAcesso = serial;
+                }                
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw new Exception("Erro na identificação da empresa");
+            }
+        }
+        internal void SetDadosEmpresa(DaoCfgEmpresa e)
+        {
+            DaoCfgEmpresa d = db.cfgEmpresa.FirstOrDefault();
+            if (d != null)
+            {
+                d.NomeEmpresa = e.NomeEmpresa;
+                d.Cnpj = e.Cnpj;
+                d.chaveAcesso = e.chaveAcesso;
+                d.statusAtivacao = e.statusAtivacao;
+                d.idCidade = e.idCidade;
+                d.dataInicioAtivacao = e.dataInicioAtivacao;
+                d.dataFimAtivacao = e.dataFimAtivacao;
+                d.identificacaoCliente = e. identificacaoCliente;
+            }
+            else
+            {
+                db.cfgEmpresa.Add(d);
+            }            
+            db.SaveChanges();
         }
     }
 }

@@ -40,7 +40,8 @@ namespace VNT_CentralDeNotificacao
 
                 if (textID.Text == string.Empty)
                 {
-                    m.SetTipoRegistro(d);
+                    int ID = m.SetTipoRegistro(d);
+                    textID.Text = ID.ToString();
                 }
                 else
                 {
@@ -90,7 +91,7 @@ namespace VNT_CentralDeNotificacao
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            textDescricao.Text= string.Empty;
+            textDescricao.Text = string.Empty;
         }
     }
 }

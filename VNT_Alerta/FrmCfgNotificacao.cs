@@ -53,7 +53,8 @@ namespace VNT_CentralDeNotificacao
 
                 if (textId.Text == string.Empty)
                 {
-                    m.SetCfgNotificacao(d);
+                    int ID = m.SetCfgNotificacao(d);
+                    textId.Text = ID.ToString();
                 }
                 else
                 {

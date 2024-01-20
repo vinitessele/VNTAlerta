@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAtivacao));
             label1 = new Label();
             label2 = new Label();
-            textBox1 = new TextBox();
+            textSerial = new TextBox();
             label3 = new Label();
             openFileDialog1 = new OpenFileDialog();
             FiletextBox = new TextBox();
@@ -65,13 +65,13 @@
             label2.TabIndex = 1;
             label2.Text = "Importar Nova Linceça de uso:";
             // 
-            // textBox1
+            // textSerial
             // 
-            textBox1.Location = new Point(12, 349);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(379, 23);
-            textBox1.TabIndex = 2;
-            textBox1.Text = "Serial";
+            textSerial.Location = new Point(12, 349);
+            textSerial.Name = "textSerial";
+            textSerial.Size = new Size(379, 23);
+            textSerial.TabIndex = 2;
+            textSerial.Text = "Serial";
             // 
             // label3
             // 
@@ -165,6 +165,7 @@
             btnAtivar.TabIndex = 7;
             btnAtivar.Text = "Ativar";
             btnAtivar.UseVisualStyleBackColor = true;
+            btnAtivar.Click += btnAtivar_Click;
             // 
             // labelVersao
             // 
@@ -188,7 +189,7 @@
             Controls.Add(btnArquivo);
             Controls.Add(FiletextBox);
             Controls.Add(label3);
-            Controls.Add(textBox1);
+            Controls.Add(textSerial);
             Controls.Add(label2);
             Controls.Add(label1);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -205,7 +206,7 @@
 
         private Label label1;
         private Label label2;
-        private TextBox textBox1;
+        private TextBox textSerial;
         private Label label3;
         private OpenFileDialog openFileDialog1;
         private TextBox FiletextBox;

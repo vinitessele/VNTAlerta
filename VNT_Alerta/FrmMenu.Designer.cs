@@ -32,10 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMenu));
             menuStrip1 = new MenuStrip();
             cadastroToolStripMenuItem = new ToolStripMenuItem();
+            toolStripMenuItem2 = new ToolStripMenuItem();
+            tipoRegistroToolStripMenuItem = new ToolStripMenuItem();
             notificaçãoToolStripMenuItem = new ToolStripMenuItem();
             empresasToolStripMenuItem = new ToolStripMenuItem();
-            tipoRegistroToolStripMenuItem = new ToolStripMenuItem();
-            toolStripMenuItem2 = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             licençaDeUsoToolStripMenuItem = new ToolStripMenuItem();
             dataGridViewNotificações = new DataGridView();
@@ -68,10 +68,24 @@
             // 
             // cadastroToolStripMenuItem
             // 
-            cadastroToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { notificaçãoToolStripMenuItem, empresasToolStripMenuItem, tipoRegistroToolStripMenuItem, toolStripMenuItem2, toolStripSeparator1, licençaDeUsoToolStripMenuItem });
+            cadastroToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2, tipoRegistroToolStripMenuItem, empresasToolStripMenuItem, notificaçãoToolStripMenuItem, toolStripSeparator1, licençaDeUsoToolStripMenuItem });
             cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
             cadastroToolStripMenuItem.Size = new Size(72, 20);
             cadastroToolStripMenuItem.Text = "Cadastros";
+            // 
+            // toolStripMenuItem2
+            // 
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(198, 22);
+            toolStripMenuItem2.Text = "Configuração de envio";
+            toolStripMenuItem2.Click += toolStripMenuItem2_Click;
+            // 
+            // tipoRegistroToolStripMenuItem
+            // 
+            tipoRegistroToolStripMenuItem.Name = "tipoRegistroToolStripMenuItem";
+            tipoRegistroToolStripMenuItem.Size = new Size(198, 22);
+            tipoRegistroToolStripMenuItem.Text = "Tipo Registro";
+            tipoRegistroToolStripMenuItem.Click += tipoRegistroToolStripMenuItem_Click;
             // 
             // notificaçãoToolStripMenuItem
             // 
@@ -86,20 +100,6 @@
             empresasToolStripMenuItem.Size = new Size(198, 22);
             empresasToolStripMenuItem.Text = "Empresas";
             empresasToolStripMenuItem.Click += empresasToolStripMenuItem_Click;
-            // 
-            // tipoRegistroToolStripMenuItem
-            // 
-            tipoRegistroToolStripMenuItem.Name = "tipoRegistroToolStripMenuItem";
-            tipoRegistroToolStripMenuItem.Size = new Size(198, 22);
-            tipoRegistroToolStripMenuItem.Text = "Tipo Registro";
-            tipoRegistroToolStripMenuItem.Click += tipoRegistroToolStripMenuItem_Click;
-            // 
-            // toolStripMenuItem2
-            // 
-            toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(198, 22);
-            toolStripMenuItem2.Text = "Configuração de envio";
-            toolStripMenuItem2.Click += toolStripMenuItem2_Click;
             // 
             // toolStripSeparator1
             // 
