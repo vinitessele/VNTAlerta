@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
             panelMenu = new Panel();
             btnPesquisar = new Button();
@@ -38,6 +39,7 @@
             btnNovo = new Button();
             groupBox1 = new GroupBox();
             paneltop = new Panel();
+            toolTip1 = new ToolTip(components);
             panelMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -66,6 +68,7 @@
             btnPesquisar.Name = "btnPesquisar";
             btnPesquisar.Size = new Size(33, 35);
             btnPesquisar.TabIndex = 5;
+            toolTip1.SetToolTip(btnPesquisar, "Pesquisa");
             btnPesquisar.UseVisualStyleBackColor = false;
             // 
             // btnEditar
@@ -77,6 +80,7 @@
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(33, 35);
             btnEditar.TabIndex = 1;
+            toolTip1.SetToolTip(btnEditar, "Alterar");
             btnEditar.UseVisualStyleBackColor = false;
             btnEditar.Click += BntEditar_Click;
             // 
@@ -89,6 +93,7 @@
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(33, 35);
             btnCancelar.TabIndex = 4;
+            toolTip1.SetToolTip(btnCancelar, "Cancelar");
             btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += BtnCancelar_Click;
             // 
@@ -101,6 +106,7 @@
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(33, 35);
             btnExcluir.TabIndex = 3;
+            toolTip1.SetToolTip(btnExcluir, "Excluir");
             btnExcluir.UseVisualStyleBackColor = false;
             btnExcluir.Click += BtnExcluir_Click;
             // 
@@ -114,6 +120,7 @@
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(33, 35);
             btnSalvar.TabIndex = 2;
+            toolTip1.SetToolTip(btnSalvar, "Salvar");
             btnSalvar.UseVisualStyleBackColor = false;
             btnSalvar.Click += BntSalvar_Click;
             // 
@@ -126,6 +133,7 @@
             btnNovo.Name = "btnNovo";
             btnNovo.Size = new Size(33, 35);
             btnNovo.TabIndex = 0;
+            toolTip1.SetToolTip(btnNovo, "Incluir");
             btnNovo.UseVisualStyleBackColor = false;
             btnNovo.Click += BtnNovo_Click;
             // 
@@ -174,5 +182,6 @@
         protected Button btnExcluir;
         protected Button btnEditar;
         protected Button btnPesquisar;
+        private ToolTip toolTip1;
     }
 }

@@ -12,7 +12,7 @@ namespace VNT_CentralDeNotificacao
         public int SetTipoRegistro(DaoTipoRegistro dados)
         {
             try
-            {               
+            {
                 if (dados.Descricao != null)
                     db.tipoRegistro.Add(dados);
                 db.SaveChanges();
@@ -52,7 +52,7 @@ namespace VNT_CentralDeNotificacao
         public List<DaoTipoRegistro> GetListTipoRegistro(string texto)
         {
             var q = from t in db.tipoRegistro
-                    where t.Descricao.Contains(texto)
+                    where t.Descricao.ToUpper().Contains(texto.ToUpper())
                     select new DaoTipoRegistro
                     {
                         Id = t.Id,
@@ -175,7 +175,7 @@ namespace VNT_CentralDeNotificacao
         public List<DaoEmpresa> GetListEmpresaNome(string texto)
         {
             var q = from t in db.empresa
-                    where t.RazaoSocial.Contains(texto)
+                    where t.RazaoSocial.ToUpper().Contains(texto.ToUpper())
                     select new DaoEmpresa
                     {
                         Id = t.Id,
@@ -252,7 +252,7 @@ namespace VNT_CentralDeNotificacao
         internal List<DaoNotificacao> GetListNotificacaoNome(string texto)
         {
             var q = from t in db.notificacao
-                    where t.Descricao.Contains(texto)
+                    where t.Descricao.ToUpper().Contains(texto.ToUpper())
                     select new DaoNotificacao
                     {
                         Id = t.Id,
@@ -342,7 +342,7 @@ namespace VNT_CentralDeNotificacao
 
         internal List<DaoSocios> GetSociosEmpresa(int id)
         {
-            return db.socios.Where(p=>p.IdEmpresa == id).ToList();
+            return db.socios.Where(p => p.IdEmpresa == id).ToList();
         }
 
         internal int SetSocios(DaoSocios dados)
@@ -383,14 +383,14 @@ namespace VNT_CentralDeNotificacao
                     {
                         d.identificacaoCliente = identificadorEmpresa;
                     }
-                    else if(d.identificacaoCliente != identificadorEmpresa)
+                    else if (d.identificacaoCliente != identificadorEmpresa)
                     {
                         throw new Exception("Erro na identificação da empresa");
                     }
                     d.dataFimAtivacao = DateTime.Parse(vencimento);
                     d.statusAtivacao = "A";
                     d.chaveAcesso = serial;
-                }                
+                }
                 db.SaveChanges();
             }
             catch
@@ -410,12 +410,13 @@ namespace VNT_CentralDeNotificacao
                 d.idCidade = e.idCidade;
                 d.dataInicioAtivacao = e.dataInicioAtivacao;
                 d.dataFimAtivacao = e.dataFimAtivacao;
-                d.identificacaoCliente = e. identificacaoCliente;
+                d.identificacaoCliente = e.identificacaoCliente;
+                db.cfgEmpresa.Add(d);
             }
             else
             {
-                db.cfgEmpresa.Add(d);
-            }            
+                db.cfgEmpresa.Add(e);
+            }
             db.SaveChanges();
         }
     }

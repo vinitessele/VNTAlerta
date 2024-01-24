@@ -260,7 +260,7 @@ namespace VNT_CentralDeNotificacao
                                     throw new InvalidOperationException(msg);
                                 }
                                 textoDescriptografado = crypt.Decrypt(line, chave);
-                                if (textoDescriptografado == e.dataInicioAtivacao.ToString())
+                                if (textoDescriptografado.Substring(0, 10) == e.dataInicioAtivacao.ToString().Substring(0, 10))
                                 {
                                     line = sr.ReadLine();
                                 }
@@ -269,7 +269,7 @@ namespace VNT_CentralDeNotificacao
                                     throw new InvalidOperationException(msg);
                                 }
                                 textoDescriptografado = crypt.Decrypt(line, chave);
-                                if (textoDescriptografado == e.dataFimAtivacao.ToString().Substring(0,10))
+                                if (textoDescriptografado.Substring(0, 10) == e.dataFimAtivacao.ToString().Substring(0,10))
                                 {
                                     line = sr.ReadLine();
                                     labelExpira.Text = "Expira em: " + textoDescriptografado;
@@ -292,6 +292,7 @@ namespace VNT_CentralDeNotificacao
                             }
                             catch
                             {
+                                sr.Close();
                                 MessageBox.Show(msg, "VNT - Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 throw;
                             }
@@ -301,7 +302,7 @@ namespace VNT_CentralDeNotificacao
                 }
             }
             catch
-            {
+            {               
                 MessageBox.Show("Falha ao verificar Licença de uso do Software", "VNT - Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
                 throw;

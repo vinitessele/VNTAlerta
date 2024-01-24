@@ -37,8 +37,6 @@
             label7 = new Label();
             label8 = new Label();
             label9 = new Label();
-            label10 = new Label();
-            label11 = new Label();
             label12 = new Label();
             label13 = new Label();
             label14 = new Label();
@@ -50,8 +48,6 @@
             textEndereco = new TextBox();
             textBairro = new TextBox();
             textCep = new TextBox();
-            textSocios = new TextBox();
-            textPercentSocios = new TextBox();
             textObs = new TextBox();
             comboBoxCidade = new ComboBox();
             textCNPJ = new MaskedTextBox();
@@ -81,8 +77,6 @@
             groupBox1.Controls.Add(textCNPJ);
             groupBox1.Controls.Add(comboBoxCidade);
             groupBox1.Controls.Add(textObs);
-            groupBox1.Controls.Add(textPercentSocios);
-            groupBox1.Controls.Add(textSocios);
             groupBox1.Controls.Add(textCep);
             groupBox1.Controls.Add(textBairro);
             groupBox1.Controls.Add(textEndereco);
@@ -94,8 +88,6 @@
             groupBox1.Controls.Add(label14);
             groupBox1.Controls.Add(label13);
             groupBox1.Controls.Add(label12);
-            groupBox1.Controls.Add(label11);
-            groupBox1.Controls.Add(label10);
             groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(label7);
@@ -208,28 +200,10 @@
             label9.TabIndex = 8;
             label9.Text = "Cidade";
             // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Location = new Point(11, 197);
-            label10.Name = "label10";
-            label10.Size = new Size(41, 15);
-            label10.TabIndex = 9;
-            label10.Text = "Sócios";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new Point(11, 225);
-            label11.Name = "label11";
-            label11.Size = new Size(76, 15);
-            label11.TabIndex = 10;
-            label11.Text = "% dos Sócios";
-            // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(11, 255);
+            label12.Location = new Point(11, 198);
             label12.Name = "label12";
             label12.Size = new Size(51, 15);
             label12.TabIndex = 11;
@@ -238,7 +212,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(223, 255);
+            label13.Location = new Point(223, 198);
             label13.Name = "label13";
             label13.Size = new Size(44, 15);
             label13.TabIndex = 12;
@@ -247,7 +221,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(11, 284);
+            label14.Location = new Point(11, 227);
             label14.Name = "label14";
             label14.Size = new Size(78, 15);
             label14.TabIndex = 13;
@@ -256,7 +230,7 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(430, 247);
+            label15.Location = new Point(11, 251);
             label15.Name = "label15";
             label15.Size = new Size(28, 15);
             label15.TabIndex = 14;
@@ -313,26 +287,12 @@
             textCep.Size = new Size(112, 23);
             textCep.TabIndex = 22;
             // 
-            // textSocios
-            // 
-            textSocios.Location = new Point(77, 189);
-            textSocios.Name = "textSocios";
-            textSocios.Size = new Size(447, 23);
-            textSocios.TabIndex = 24;
-            // 
-            // textPercentSocios
-            // 
-            textPercentSocios.Location = new Point(93, 217);
-            textPercentSocios.Name = "textPercentSocios";
-            textPercentSocios.Size = new Size(431, 23);
-            textPercentSocios.TabIndex = 25;
-            // 
             // textObs
             // 
-            textObs.Location = new Point(464, 247);
+            textObs.Location = new Point(11, 269);
             textObs.Multiline = true;
             textObs.Name = "textObs";
-            textObs.Size = new Size(306, 103);
+            textObs.Size = new Size(759, 82);
             textObs.TabIndex = 31;
             // 
             // comboBoxCidade
@@ -354,7 +314,7 @@
             // 
             // textCelular
             // 
-            textCelular.Location = new Point(272, 247);
+            textCelular.Location = new Point(272, 190);
             textCelular.Mask = "(99)99999-9999";
             textCelular.Name = "textCelular";
             textCelular.Size = new Size(107, 23);
@@ -362,7 +322,7 @@
             // 
             // textTelefone
             // 
-            textTelefone.Location = new Point(93, 247);
+            textTelefone.Location = new Point(93, 190);
             textTelefone.Mask = "(99)99999-9999";
             textTelefone.Name = "textTelefone";
             textTelefone.Size = new Size(107, 23);
@@ -370,7 +330,7 @@
             // 
             // textAbertura
             // 
-            textAbertura.Location = new Point(93, 276);
+            textAbertura.Location = new Point(93, 219);
             textAbertura.Mask = "00/00/0000";
             textAbertura.Name = "textAbertura";
             textAbertura.Size = new Size(107, 23);
@@ -486,8 +446,6 @@
         private Label label14;
         private Label label13;
         private Label label12;
-        private Label label11;
-        private Label label10;
         private Label label9;
         private Label label8;
         private Label label7;

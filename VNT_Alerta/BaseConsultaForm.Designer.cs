@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseConsultaForm));
             groupBox1 = new GroupBox();
             textBoxPesquisa = new TextBox();
             groupBox2 = new GroupBox();
             dataGridView1 = new DataGridView();
+            toolTip1 = new ToolTip(components);
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -54,6 +56,7 @@
             textBoxPesquisa.Name = "textBoxPesquisa";
             textBoxPesquisa.Size = new Size(713, 23);
             textBoxPesquisa.TabIndex = 0;
+            toolTip1.SetToolTip(textBoxPesquisa, "Digite para realizar a pesquisa");
             // 
             // groupBox2
             // 
@@ -102,5 +105,6 @@
         protected TextBox textBoxPesquisa;
         protected GroupBox groupBox2;
         protected DataGridView dataGridView1;
+        private ToolTip toolTip1;
     }
 }

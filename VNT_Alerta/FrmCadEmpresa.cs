@@ -61,7 +61,7 @@ namespace VNT_CentralDeNotificacao
 
             if (textId.Text == string.Empty)
             {
-                IDEmpresa =  m.SetEmpresa(d);
+                IDEmpresa = m.SetEmpresa(d);
                 textId.Text = IDEmpresa.ToString();
             }
             else
@@ -149,7 +149,7 @@ namespace VNT_CentralDeNotificacao
         private void btnAddSocios_Click(object sender, EventArgs e)
         {
             AdicionarEmpresa();
-            
+
             Model m = new();
             DaoSocios s = new();
 
@@ -167,6 +167,9 @@ namespace VNT_CentralDeNotificacao
             m.SetSocios(s);
 
             AtualizaGridSocios();
+            textNomeSocio.Text = string.Empty;
+            textPercential.Text = string.Empty;
+            textNomeSocio.Focus();
         }
 
         private void dataGridViewSocios_CellClick(object sender, DataGridViewCellEventArgs e)
